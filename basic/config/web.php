@@ -6,7 +6,38 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+             'user' => [
+                'class' => 'dektrium\user\Module',
+                 ],
+
+             'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+             // enter optional module parameters below - only if you need to  
+             // use your own export download action or custom translation 
+             // message source
+             'downloadAction' => 'gridview/export/download',
+              'i18n' => [
+                            'class' => 'yii\i18n\PhpMessageSource',
+                            'basePath' => '@kvgrid/messages',
+                            'forceTranslation' => true
+
+                        ]
+               ],
+
+            ],
     'components' => [
+
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => ['@webroot/themes/thm1'],
+                    //'@app/views' => ['@webroot/themes/thm2'],
+                    'baseUrl'=>'@web'
+                ]
+            ]
+        ],
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'DoingITeasy',
@@ -14,10 +45,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
+        /*'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-        ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
