@@ -12,11 +12,9 @@ use Yii;
  * @property string $nombre
  * @property string $tipo
  *
- * @property Cliente[] $clientes
  * @property Estacion[] $estacions
  * @property Localidad $localidadIdlocalidad
  * @property Localidad[] $localidads
- * @property Nodo[] $nodos
  */
 class Localidad extends \yii\db\ActiveRecord
 {
@@ -34,8 +32,8 @@ class Localidad extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['localidad_idlocalidad', 'nombre'], 'required'],
-            [['localidad_idlocalidad'], 'string'],
+            [['localidad_idlocalidad'], 'integer'],
+            [['nombre'], 'required'],
             [['nombre'], 'string', 'max' => 50],
             [['tipo'], 'string', 'max' => 20]
         ];
@@ -48,18 +46,10 @@ class Localidad extends \yii\db\ActiveRecord
     {
         return [
             'idlocalidad' => 'Idlocalidad',
-            'localidad_idlocalidad' => 'Ubicación',
+            'localidad_idlocalidad' => 'Localidad Idlocalidad',
             'nombre' => 'Nombre',
             'tipo' => 'Tipo',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClientes()
-    {
-        return $this->hasMany(Cliente::className(), ['localidad_idlocalidad' => 'idlocalidad']);
     }
 
     /**
@@ -84,13 +74,5 @@ class Localidad extends \yii\db\ActiveRecord
     public function getLocalidads()
     {
         return $this->hasMany(Localidad::className(), ['localidad_idlocalidad' => 'idlocalidad']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNodos()
-    {
-        return $this->hasMany(Nodo::className(), ['localidad_idlocalidad' => 'idlocalidad']);
     }
 }

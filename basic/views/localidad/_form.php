@@ -16,13 +16,13 @@ use yii\helpers\ArrayHelper;
 
 <?php
  
-$this->registerJs(
-   '$("document").ready(function(){ 
-        $("#nuevo").on("pjax:end", function() {
-            $.pjax.reload({container:"#localGrid"});  //Reload GridView
-        });
-    });'
-);
+//$this->registerJs(
+ //  '$("document").ready(function(){ 
+//        $("#nuevo").on("pjax:end", function() {
+//            $.pjax.reload({container:"#localGrid"});  //Reload GridView
+//        });
+//    });'
+//);
 ?>
 
 

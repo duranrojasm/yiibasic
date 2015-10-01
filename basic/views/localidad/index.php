@@ -14,7 +14,7 @@ use kartik\export\ExportMenu;
 /* @var $searchModel app\models\LocalidadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Localidads';
+$this->title = 'Localidades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -41,10 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ]);?>
 
 
- <?= $this->render('_form', [
+ <!--<?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+-->
 <?php Pjax::begin(['id'=>'localGrid', 'timeout' => false, 
 'enablePushState' => false]);?>
     <?= GridView::widget([

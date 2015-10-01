@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d713d16c319b20d207c7db094543a42",
+    "hash": "5ec5af693f83d506355568dde7d9d5e4",
     "content-hash": "573b02cc61ac9d918aa3358b8b88d456",
     "packages": [
         {
@@ -300,16 +300,16 @@
         },
         {
             "name": "dektrium/yii2-user",
-            "version": "v0.9.4",
+            "version": "v0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dektrium/yii2-user.git",
-                "reference": "891fe6c3957bde7f3a7893775fd304fc84140599"
+                "reference": "84100e0e63e2052ef4ddd12f1840dfd092446e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/891fe6c3957bde7f3a7893775fd304fc84140599",
-                "reference": "891fe6c3957bde7f3a7893775fd304fc84140599",
+                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/84100e0e63e2052ef4ddd12f1840dfd092446e23",
+                "reference": "84100e0e63e2052ef4ddd12f1840dfd092446e23",
                 "shasum": ""
             },
             "require": {
@@ -329,8 +329,7 @@
             "extra": {
                 "bootstrap": "dektrium\\user\\Bootstrap",
                 "branch-alias": {
-                    "dev-master": "0.9.x-dev",
-                    "dev-develop": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 },
                 "asset-installer-paths": {
                     "npm-asset-library": "vendor/npm",
@@ -360,7 +359,7 @@
                 "yii2",
                 "yii2-user"
             ],
-            "time": "2015-04-06 09:21:39"
+            "time": "2015-09-27 14:49:11"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -412,12 +411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "951ab717372f518ede26c6bb2f92024ba8107d96"
+                "reference": "c85a8320b2e02e1238ea5a8f2fda2137d8754d91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/951ab717372f518ede26c6bb2f92024ba8107d96",
-                "reference": "951ab717372f518ede26c6bb2f92024ba8107d96",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/c85a8320b2e02e1238ea5a8f2fda2137d8754d91",
+                "reference": "c85a8320b2e02e1238ea5a8f2fda2137d8754d91",
                 "shasum": ""
             },
             "type": "library",
@@ -452,7 +451,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-09-26 05:25:11"
+            "time": "2015-09-28 17:35:05"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
