@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idestructur_eq') ?>
-
     <?= $form->field($model, 'radio_idradio') ?>
 
     <?= $form->field($model, 'estructura_idestructura') ?>

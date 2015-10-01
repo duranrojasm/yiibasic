@@ -18,7 +18,7 @@ class RadioCaracSearch extends RadioCarac
     public function rules()
     {
         return [
-            [['idradio_carac', 'caracteristicasrad_idcaracteristicas', 'radio_idradio'], 'integer'],
+            [['caracteristicasrad_idcaracteristicas', 'radio_idradio'], 'integer'],
             [['valor'], 'safe'],
         ];
     }
@@ -56,7 +56,6 @@ class RadioCaracSearch extends RadioCarac
         }
 
         $query->andFilterWhere([
-            'idradio_carac' => $this->idradio_carac,
             'caracteristicasrad_idcaracteristicas' => $this->caracteristicasrad_idcaracteristicas,
             'radio_idradio' => $this->radio_idradio,
         ]);

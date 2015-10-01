@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsuarioImpSegdad */
 
-$this->title = $model->idusuario_imp_segdad;
+$this->title = $model->implemento_segurd_idimplemento_segurd;
 $this->params['breadcrumbs'][] = ['label' => 'Usuario Imp Segdads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idusuario_imp_segdad], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idusuario_imp_segdad], [
+        <?= Html::a('Update', ['update', 'implemento_segurd_idimplemento_segurd' => $model->implemento_segurd_idimplemento_segurd, 'usuario_idusuario' => $model->usuario_idusuario], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'implemento_segurd_idimplemento_segurd' => $model->implemento_segurd_idimplemento_segurd, 'usuario_idusuario' => $model->usuario_idusuario], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idusuario_imp_segdad',
             'implemento_segurd_idimplemento_segurd',
             'usuario_idusuario',
             'fecha',

@@ -22,6 +22,8 @@ use Yii;
  * @property Estacion $estacionIdestaciondos
  * @property Nodo $nodoIdnodo
  * @property Nodo $nodoIdnododos
+ * @property FibraOpticaCarac[] $fibraOpticaCaracs
+ * @property CaracteristicaFo[] $caracteristicaFoIdcaracteristicas
  * @property ManteCorrectivo[] $manteCorrectivos
  * @property MantenimientoPreventivo[] $mantenimientoPreventivos
  */
@@ -105,6 +107,22 @@ class FibraOptica extends \yii\db\ActiveRecord
     public function getNodoIdnododos()
     {
         return $this->hasOne(Nodo::className(), ['idnodo' => 'nodo_idnododos']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFibraOpticaCaracs()
+    {
+        return $this->hasMany(FibraOpticaCarac::className(), ['fibra_optica_idfibra_optica' => 'idfibra_optica']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCaracteristicaFoIdcaracteristicas()
+    {
+        return $this->hasMany(CaracteristicaFo::className(), ['idcaracteristica_fo' => 'caracteristica_fo_idcaracteristica'])->viaTable('fibra_optica_carac', ['fibra_optica_idfibra_optica' => 'idfibra_optica']);
     }
 
     /**

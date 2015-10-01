@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\EstructurEq */
 
-$this->title = $model->idestructur_eq;
+$this->title = $model->radio_idradio;
 $this->params['breadcrumbs'][] = ['label' => 'Estructur Eqs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idestructur_eq], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idestructur_eq], [
+        <?= Html::a('Update', ['update', 'radio_idradio' => $model->radio_idradio, 'estructura_idestructura' => $model->estructura_idestructura], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'radio_idradio' => $model->radio_idradio, 'estructura_idestructura' => $model->estructura_idestructura], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idestructur_eq',
             'radio_idradio',
             'estructura_idestructura',
             'fecha',

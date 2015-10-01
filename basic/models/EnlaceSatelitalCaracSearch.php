@@ -18,7 +18,7 @@ class EnlaceSatelitalCaracSearch extends EnlaceSatelitalCarac
     public function rules()
     {
         return [
-            [['idenlace_satelital_carac', 'caracteristica_es_idcaracteristica', 'enlace_satelital_idenlace_satelital'], 'integer'],
+            [['caracteristica_es_idcaracteristica', 'enlace_satelital_idenlace_satelital'], 'integer'],
             [['valor'], 'safe'],
         ];
     }
@@ -56,7 +56,6 @@ class EnlaceSatelitalCaracSearch extends EnlaceSatelitalCarac
         }
 
         $query->andFilterWhere([
-            'idenlace_satelital_carac' => $this->idenlace_satelital_carac,
             'caracteristica_es_idcaracteristica' => $this->caracteristica_es_idcaracteristica,
             'enlace_satelital_idenlace_satelital' => $this->enlace_satelital_idenlace_satelital,
         ]);

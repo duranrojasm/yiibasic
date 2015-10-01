@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\EnlaceSatelitalCarac */
 
-$this->title = $model->idenlace_satelital_carac;
+$this->title = $model->caracteristica_es_idcaracteristica;
 $this->params['breadcrumbs'][] = ['label' => 'Enlace Satelital Caracs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idenlace_satelital_carac], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idenlace_satelital_carac], [
+        <?= Html::a('Update', ['update', 'caracteristica_es_idcaracteristica' => $model->caracteristica_es_idcaracteristica, 'enlace_satelital_idenlace_satelital' => $model->enlace_satelital_idenlace_satelital], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'caracteristica_es_idcaracteristica' => $model->caracteristica_es_idcaracteristica, 'enlace_satelital_idenlace_satelital' => $model->enlace_satelital_idenlace_satelital], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idenlace_satelital_carac',
             'caracteristica_es_idcaracteristica',
             'enlace_satelital_idenlace_satelital',
             'valor',

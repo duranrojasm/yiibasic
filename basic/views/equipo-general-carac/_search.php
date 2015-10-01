@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idequipo_general_carac') ?>
-
     <?= $form->field($model, 'caractersticas_em_idcaractersticas_em') ?>
 
     <?= $form->field($model, 'equipo_general_idequipo_general') ?>

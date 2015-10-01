@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idradio_carac',
             'caracteristicasrad_idcaracteristicas',
             'radio_idradio',
             'valor',

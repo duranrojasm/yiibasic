@@ -18,7 +18,7 @@ class UsuarioImpSegdadSearch extends UsuarioImpSegdad
     public function rules()
     {
         return [
-            [['idusuario_imp_segdad', 'implemento_segurd_idimplemento_segurd', 'usuario_idusuario', 'cantidad_req', 'cantidad_tiene'], 'integer'],
+            [['implemento_segurd_idimplemento_segurd', 'usuario_idusuario', 'cantidad_req', 'cantidad_tiene'], 'integer'],
             [['fecha', 'observacion'], 'safe'],
         ];
     }
@@ -56,7 +56,6 @@ class UsuarioImpSegdadSearch extends UsuarioImpSegdad
         }
 
         $query->andFilterWhere([
-            'idusuario_imp_segdad' => $this->idusuario_imp_segdad,
             'implemento_segurd_idimplemento_segurd' => $this->implemento_segurd_idimplemento_segurd,
             'usuario_idusuario' => $this->usuario_idusuario,
             'fecha' => $this->fecha,

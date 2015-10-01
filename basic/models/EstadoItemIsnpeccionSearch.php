@@ -18,7 +18,7 @@ class EstadoItemIsnpeccionSearch extends EstadoItemIsnpeccion
     public function rules()
     {
         return [
-            [['idestado_item_isnpeccion', 'inspeccion_idinspeccion', 'item_iditem'], 'integer'],
+            [['inspeccion_idinspeccion', 'item_iditem'], 'integer'],
             [['fecha', 'descrip_novedades', 'estado_items'], 'safe'],
             [['valor_potencia_volt'], 'number'],
         ];
@@ -57,7 +57,6 @@ class EstadoItemIsnpeccionSearch extends EstadoItemIsnpeccion
         }
 
         $query->andFilterWhere([
-            'idestado_item_isnpeccion' => $this->idestado_item_isnpeccion,
             'inspeccion_idinspeccion' => $this->inspeccion_idinspeccion,
             'item_iditem' => $this->item_iditem,
             'fecha' => $this->fecha,

@@ -18,7 +18,7 @@ class InspeccionSearch extends Inspeccion
     public function rules()
     {
         return [
-            [['idinspeccion', 'nodo_idnodo', 'estructur_eq_idestructur_eq', 'estacion_idestacion'], 'integer'],
+            [['idinspeccion', 'nodo_idnodo', 'estacion_idestacion', 'radio_idradio'], 'integer'],
             [['descripcion', 'ptos_referencia', 'fecha_asig', 'fecha_insp', 'estatus'], 'safe'],
         ];
     }
@@ -58,10 +58,10 @@ class InspeccionSearch extends Inspeccion
         $query->andFilterWhere([
             'idinspeccion' => $this->idinspeccion,
             'nodo_idnodo' => $this->nodo_idnodo,
-            'estructur_eq_idestructur_eq' => $this->estructur_eq_idestructur_eq,
             'estacion_idestacion' => $this->estacion_idestacion,
             'fecha_asig' => $this->fecha_asig,
             'fecha_insp' => $this->fecha_insp,
+            'radio_idradio' => $this->radio_idradio,
         ]);
 
         $query->andFilterWhere(['like', 'descripcion', $this->descripcion])

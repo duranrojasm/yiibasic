@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
             'type' => ActiveForm::TYPE_VERTICAL,
             'options' => ['data-pjax' => true ],
             'formConfig' => [
-                'labelSpan' => 1, 
+                'labelSpan' => 2, 
                 'deviceSize' => ActiveForm::SIZE_SMALL,
                 'showErrors' => true,
                 
@@ -46,7 +46,7 @@ use yii\helpers\ArrayHelper;
 
      <?= $form->field($model, 'localidad_idlocalidad')->dropDownList(
         ArrayHelper::map(Localidad::find()->all(),'idlocalidad','nombre'),
-      ['prompt'=>'Seleccione Localidad']) 
+      ['prompt'=>'Seleccione Localidad']) ->label('Ubicación General');
     ?> 
 
  
@@ -57,7 +57,7 @@ use yii\helpers\ArrayHelper;
  
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-warning' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

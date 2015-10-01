@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nodo_idnodo')->textInput() ?>
 
-    <?= $form->field($model, 'estructur_eq_idestructur_eq')->textInput() ?>
-
     <?= $form->field($model, 'estacion_idestacion')->textInput() ?>
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
@@ -27,6 +25,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'fecha_insp')->textInput() ?>
 
     <?= $form->field($model, 'estatus')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'radio_idradio')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

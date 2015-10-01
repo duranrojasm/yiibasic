@@ -18,7 +18,7 @@ class UsuarioReportefSearch extends UsuarioReportef
     public function rules()
     {
         return [
-            [['idusuario_reportef', 'reporte_falla_idreporte_falla', 'usuario_idusuario'], 'integer'],
+            [['reporte_falla_idreporte_falla', 'usuario_idusuario'], 'integer'],
         ];
     }
 
@@ -55,7 +55,6 @@ class UsuarioReportefSearch extends UsuarioReportef
         }
 
         $query->andFilterWhere([
-            'idusuario_reportef' => $this->idusuario_reportef,
             'reporte_falla_idreporte_falla' => $this->reporte_falla_idreporte_falla,
             'usuario_idusuario' => $this->usuario_idusuario,
         ]);

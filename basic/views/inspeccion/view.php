@@ -30,13 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'idinspeccion',
             'nodo_idnodo',
-            'estructur_eq_idestructur_eq',
             'estacion_idestacion',
             'descripcion',
             'ptos_referencia',
             'fecha_asig',
             'fecha_insp',
             'estatus',
+            'radio_idradio',
         ],
     ]) ?>
 

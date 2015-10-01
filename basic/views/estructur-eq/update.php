@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EstructurEq */
 
-$this->title = 'Update Estructur Eq: ' . ' ' . $model->idestructur_eq;
+$this->title = 'Update Estructur Eq: ' . ' ' . $model->radio_idradio;
 $this->params['breadcrumbs'][] = ['label' => 'Estructur Eqs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idestructur_eq, 'url' => ['view', 'id' => $model->idestructur_eq]];
+$this->params['breadcrumbs'][] = ['label' => $model->radio_idradio, 'url' => ['view', 'radio_idradio' => $model->radio_idradio, 'estructura_idestructura' => $model->estructura_idestructura]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="estructur-eq-update">

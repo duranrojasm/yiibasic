@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "radio_carac".
  *
- * @property integer $idradio_carac
  * @property integer $caracteristicasrad_idcaracteristicas
  * @property integer $radio_idradio
  * @property string $valor
@@ -43,7 +42,6 @@ class RadioCarac extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idradio_carac' => 'Idradio Carac',
             'caracteristicasrad_idcaracteristicas' => 'Caracteristicasrad Idcaracteristicas',
             'radio_idradio' => 'Radio Idradio',
             'valor' => 'Valor',

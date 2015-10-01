@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsuarioReportef */
 
-$this->title = $model->idusuario_reportef;
+$this->title = $model->reporte_falla_idreporte_falla;
 $this->params['breadcrumbs'][] = ['label' => 'Usuario Reportefs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idusuario_reportef], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idusuario_reportef], [
+        <?= Html::a('Update', ['update', 'reporte_falla_idreporte_falla' => $model->reporte_falla_idreporte_falla, 'usuario_idusuario' => $model->usuario_idusuario], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'reporte_falla_idreporte_falla' => $model->reporte_falla_idreporte_falla, 'usuario_idusuario' => $model->usuario_idusuario], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idusuario_reportef',
             'reporte_falla_idreporte_falla',
             'usuario_idusuario',
         ],

@@ -18,7 +18,7 @@ class UsuarioEquimediSearch extends UsuarioEquimedi
     public function rules()
     {
         return [
-            [['idusuario_equimedi', 'equipo_general_idequipo_general', 'usuario_idusuario'], 'integer'],
+            [['equipo_general_idequipo_general', 'usuario_idusuario'], 'integer'],
         ];
     }
 
@@ -55,7 +55,6 @@ class UsuarioEquimediSearch extends UsuarioEquimedi
         }
 
         $query->andFilterWhere([
-            'idusuario_equimedi' => $this->idusuario_equimedi,
             'equipo_general_idequipo_general' => $this->equipo_general_idequipo_general,
             'usuario_idusuario' => $this->usuario_idusuario,
         ]);

@@ -18,7 +18,7 @@ class EquipoGeneralCaracSearch extends EquipoGeneralCarac
     public function rules()
     {
         return [
-            [['idequipo_general_carac', 'caractersticas_em_idcaractersticas_em', 'equipo_general_idequipo_general'], 'integer'],
+            [['caractersticas_em_idcaractersticas_em', 'equipo_general_idequipo_general'], 'integer'],
             [['valor'], 'safe'],
         ];
     }
@@ -56,7 +56,6 @@ class EquipoGeneralCaracSearch extends EquipoGeneralCarac
         }
 
         $query->andFilterWhere([
-            'idequipo_general_carac' => $this->idequipo_general_carac,
             'caractersticas_em_idcaractersticas_em' => $this->caractersticas_em_idcaractersticas_em,
             'equipo_general_idequipo_general' => $this->equipo_general_idequipo_general,
         ]);

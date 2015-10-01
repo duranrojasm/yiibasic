@@ -18,8 +18,10 @@ use Yii;
  * @property string $aviso
  * @property string $obser_aviso
  * @property string $fecha
+ * @property string $estatus
  *
- * @property Usuario[] $usuarios
+ * @property VehiculoReportef[] $vehiculoReportefs
+ * @property ReporteFalla[] $reporteFallaIdreporteFallas
  */
 class Vehiculo extends \yii\db\ActiveRecord
 {
@@ -40,7 +42,7 @@ class Vehiculo extends \yii\db\ActiveRecord
             [['control', 'placa'], 'required'],
             [['ano'], 'integer'],
             [['fecha'], 'safe'],
-            [['control', 'marca', 'modelo', 'unidad', 'estado', 'aviso'], 'string', 'max' => 20],
+            [['control', 'marca', 'modelo', 'unidad', 'estado', 'aviso', 'estatus'], 'string', 'max' => 20],
             [['placa'], 'string', 'max' => 10],
             [['obser_aviso'], 'string', 'max' => 100]
         ];
@@ -63,14 +65,23 @@ class Vehiculo extends \yii\db\ActiveRecord
             'aviso' => 'Aviso',
             'obser_aviso' => 'Obser Aviso',
             'fecha' => 'Fecha',
+            'estatus' => 'Estatus',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    public function getVehiculoReportefs()
     {
-        return $this->hasMany(Usuario::className(), ['vehiculo_idvehiculo' => 'idvehiculo']);
+        return $this->hasMany(VehiculoReportef::className(), ['vehiculo_idvehiculo' => 'idvehiculo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReporteFallaIdreporteFallas()
+    {
+        return $this->hasMany(ReporteFalla::className(), ['idreporte_falla' => 'reporte_falla_idreporte_falla'])->viaTable('vehiculo_reportef', ['vehiculo_idvehiculo' => 'idvehiculo']);
     }
 }

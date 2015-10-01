@@ -43,13 +43,14 @@ class EnlaceSatelitalCaracController extends Controller
 
     /**
      * Displays a single EnlaceSatelitalCarac model.
-     * @param integer $id
+     * @param integer $caracteristica_es_idcaracteristica
+     * @param integer $enlace_satelital_idenlace_satelital
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital),
         ]);
     }
 
@@ -63,7 +64,7 @@ class EnlaceSatelitalCaracController extends Controller
         $model = new EnlaceSatelitalCarac();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idenlace_satelital_carac]);
+            return $this->redirect(['view', 'caracteristica_es_idcaracteristica' => $model->caracteristica_es_idcaracteristica, 'enlace_satelital_idenlace_satelital' => $model->enlace_satelital_idenlace_satelital]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,15 +75,16 @@ class EnlaceSatelitalCaracController extends Controller
     /**
      * Updates an existing EnlaceSatelitalCarac model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $caracteristica_es_idcaracteristica
+     * @param integer $enlace_satelital_idenlace_satelital
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idenlace_satelital_carac]);
+            return $this->redirect(['view', 'caracteristica_es_idcaracteristica' => $model->caracteristica_es_idcaracteristica, 'enlace_satelital_idenlace_satelital' => $model->enlace_satelital_idenlace_satelital]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,12 +95,13 @@ class EnlaceSatelitalCaracController extends Controller
     /**
      * Deletes an existing EnlaceSatelitalCarac model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $caracteristica_es_idcaracteristica
+     * @param integer $enlace_satelital_idenlace_satelital
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital)->delete();
 
         return $this->redirect(['index']);
     }
@@ -106,13 +109,14 @@ class EnlaceSatelitalCaracController extends Controller
     /**
      * Finds the EnlaceSatelitalCarac model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $caracteristica_es_idcaracteristica
+     * @param integer $enlace_satelital_idenlace_satelital
      * @return EnlaceSatelitalCarac the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($caracteristica_es_idcaracteristica, $enlace_satelital_idenlace_satelital)
     {
-        if (($model = EnlaceSatelitalCarac::findOne($id)) !== null) {
+        if (($model = EnlaceSatelitalCarac::findOne(['caracteristica_es_idcaracteristica' => $caracteristica_es_idcaracteristica, 'enlace_satelital_idenlace_satelital' => $enlace_satelital_idenlace_satelital])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

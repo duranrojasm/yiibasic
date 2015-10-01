@@ -10,7 +10,6 @@ use Yii;
  * @property integer $idusuario
  * @property integer $estacion_idestacion
  * @property integer $rol_idrol
- * @property integer $vehiculo_idvehiculo
  * @property string $nombre
  * @property string $apellido
  * @property string $cedula
@@ -28,10 +27,12 @@ use Yii;
  * @property Herramienta[] $herramientas
  * @property Estacion $estacionIdestacion
  * @property Rol $rolIdrol
- * @property Vehiculo $vehiculoIdvehiculo
  * @property UsuarioEquimedi[] $usuarioEquimedis
+ * @property EquipoGeneral[] $equipoGeneralIdequipoGenerals
  * @property UsuarioImpSegdad[] $usuarioImpSegdads
+ * @property ImplementoSegurd[] $implementoSegurdIdimplementoSegurds
  * @property UsuarioReportef[] $usuarioReportefs
+ * @property ReporteFalla[] $reporteFallaIdreporteFallas
  */
 class Usuario extends \yii\db\ActiveRecord
 {
@@ -49,8 +50,8 @@ class Usuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['estacion_idestacion', 'rol_idrol', 'vehiculo_idvehiculo', 'nombre', 'apellido', 'cedula', 'num_sap', 'carnet', 'telefono_cel', 'cargo', 'correo'], 'required'],
-            [['estacion_idestacion', 'rol_idrol', 'vehiculo_idvehiculo'], 'integer'],
+            [['estacion_idestacion', 'rol_idrol', 'nombre', 'apellido', 'cedula', 'num_sap', 'carnet', 'telefono_cel', 'cargo', 'correo'], 'required'],
+            [['estacion_idestacion', 'rol_idrol'], 'integer'],
             [['disponibilidad'], 'boolean'],
             [['nombre', 'apellido', 'gerencia_general', 'gerencia', 'departamento'], 'string', 'max' => 30],
             [['cedula', 'num_sap', 'carnet', 'telefono_cel', 'telefono_hab'], 'string', 'max' => 20],
@@ -67,7 +68,6 @@ class Usuario extends \yii\db\ActiveRecord
             'idusuario' => 'Idusuario',
             'estacion_idestacion' => 'Estacion Idestacion',
             'rol_idrol' => 'Rol Idrol',
-            'vehiculo_idvehiculo' => 'Vehiculo Idvehiculo',
             'nombre' => 'Nombre',
             'apellido' => 'Apellido',
             'cedula' => 'Cedula',
@@ -111,17 +111,17 @@ class Usuario extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVehiculoIdvehiculo()
+    public function getUsuarioEquimedis()
     {
-        return $this->hasOne(Vehiculo::className(), ['idvehiculo' => 'vehiculo_idvehiculo']);
+        return $this->hasMany(UsuarioEquimedi::className(), ['usuario_idusuario' => 'idusuario']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarioEquimedis()
+    public function getEquipoGeneralIdequipoGenerals()
     {
-        return $this->hasMany(UsuarioEquimedi::className(), ['usuario_idusuario' => 'idusuario']);
+        return $this->hasMany(EquipoGeneral::className(), ['idequipo_general' => 'equipo_general_idequipo_general'])->viaTable('usuario_equimedi', ['usuario_idusuario' => 'idusuario']);
     }
 
     /**
@@ -135,8 +135,24 @@ class Usuario extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getImplementoSegurdIdimplementoSegurds()
+    {
+        return $this->hasMany(ImplementoSegurd::className(), ['idimplemento_segurd' => 'implemento_segurd_idimplemento_segurd'])->viaTable('usuario_imp_segdad', ['usuario_idusuario' => 'idusuario']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUsuarioReportefs()
     {
         return $this->hasMany(UsuarioReportef::className(), ['usuario_idusuario' => 'idusuario']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReporteFallaIdreporteFallas()
+    {
+        return $this->hasMany(ReporteFalla::className(), ['idreporte_falla' => 'reporte_falla_idreporte_falla'])->viaTable('usuario_reportef', ['usuario_idusuario' => 'idusuario']);
     }
 }

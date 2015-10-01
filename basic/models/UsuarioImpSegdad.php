@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "usuario_imp_segdad".
  *
- * @property integer $idusuario_imp_segdad
  * @property integer $implemento_segurd_idimplemento_segurd
  * @property integer $usuario_idusuario
  * @property string $fecha
@@ -47,7 +46,6 @@ class UsuarioImpSegdad extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idusuario_imp_segdad' => 'Idusuario Imp Segdad',
             'implemento_segurd_idimplemento_segurd' => 'Implemento Segurd Idimplemento Segurd',
             'usuario_idusuario' => 'Usuario Idusuario',
             'fecha' => 'Fecha',

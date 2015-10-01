@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\EquipoGeneralCarac */
 
-$this->title = $model->idequipo_general_carac;
+$this->title = $model->caractersticas_em_idcaractersticas_em;
 $this->params['breadcrumbs'][] = ['label' => 'Equipo General Caracs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idequipo_general_carac], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idequipo_general_carac], [
+        <?= Html::a('Update', ['update', 'caractersticas_em_idcaractersticas_em' => $model->caractersticas_em_idcaractersticas_em, 'equipo_general_idequipo_general' => $model->equipo_general_idequipo_general], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'caractersticas_em_idcaractersticas_em' => $model->caractersticas_em_idcaractersticas_em, 'equipo_general_idequipo_general' => $model->equipo_general_idequipo_general], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idequipo_general_carac',
             'caractersticas_em_idcaractersticas_em',
             'equipo_general_idequipo_general',
             'valor',

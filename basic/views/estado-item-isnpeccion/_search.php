@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idestado_item_isnpeccion') ?>
-
     <?= $form->field($model, 'inspeccion_idinspeccion') ?>
 
     <?= $form->field($model, 'item_iditem') ?>
@@ -25,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descrip_novedades') ?>
 
-    <?php // echo $form->field($model, 'estado_items') ?>
+    <?= $form->field($model, 'estado_items') ?>
 
     <?php // echo $form->field($model, 'valor_potencia_volt') ?>
 

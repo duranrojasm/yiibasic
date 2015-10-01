@@ -43,13 +43,14 @@ class EquipoGeneralCaracController extends Controller
 
     /**
      * Displays a single EquipoGeneralCarac model.
-     * @param integer $id
+     * @param integer $caractersticas_em_idcaractersticas_em
+     * @param integer $equipo_general_idequipo_general
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general),
         ]);
     }
 
@@ -63,7 +64,7 @@ class EquipoGeneralCaracController extends Controller
         $model = new EquipoGeneralCarac();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idequipo_general_carac]);
+            return $this->redirect(['view', 'caractersticas_em_idcaractersticas_em' => $model->caractersticas_em_idcaractersticas_em, 'equipo_general_idequipo_general' => $model->equipo_general_idequipo_general]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,15 +75,16 @@ class EquipoGeneralCaracController extends Controller
     /**
      * Updates an existing EquipoGeneralCarac model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $caractersticas_em_idcaractersticas_em
+     * @param integer $equipo_general_idequipo_general
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idequipo_general_carac]);
+            return $this->redirect(['view', 'caractersticas_em_idcaractersticas_em' => $model->caractersticas_em_idcaractersticas_em, 'equipo_general_idequipo_general' => $model->equipo_general_idequipo_general]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,12 +95,13 @@ class EquipoGeneralCaracController extends Controller
     /**
      * Deletes an existing EquipoGeneralCarac model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $caractersticas_em_idcaractersticas_em
+     * @param integer $equipo_general_idequipo_general
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general)->delete();
 
         return $this->redirect(['index']);
     }
@@ -106,13 +109,14 @@ class EquipoGeneralCaracController extends Controller
     /**
      * Finds the EquipoGeneralCarac model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $caractersticas_em_idcaractersticas_em
+     * @param integer $equipo_general_idequipo_general
      * @return EquipoGeneralCarac the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($caractersticas_em_idcaractersticas_em, $equipo_general_idequipo_general)
     {
-        if (($model = EquipoGeneralCarac::findOne($id)) !== null) {
+        if (($model = EquipoGeneralCarac::findOne(['caractersticas_em_idcaractersticas_em' => $caractersticas_em_idcaractersticas_em, 'equipo_general_idequipo_general' => $equipo_general_idequipo_general])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "estado_item_isnpeccion".
  *
- * @property integer $idestado_item_isnpeccion
  * @property integer $inspeccion_idinspeccion
  * @property integer $item_iditem
  * @property string $fecha
@@ -49,7 +48,6 @@ class EstadoItemIsnpeccion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idestado_item_isnpeccion' => 'Idestado Item Isnpeccion',
             'inspeccion_idinspeccion' => 'Inspeccion Idinspeccion',
             'item_iditem' => 'Item Iditem',
             'fecha' => 'Fecha',

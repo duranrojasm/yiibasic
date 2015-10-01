@@ -43,13 +43,14 @@ class UsuarioReportefController extends Controller
 
     /**
      * Displays a single UsuarioReportef model.
-     * @param integer $id
+     * @param integer $reporte_falla_idreporte_falla
+     * @param integer $usuario_idusuario
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($reporte_falla_idreporte_falla, $usuario_idusuario)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($reporte_falla_idreporte_falla, $usuario_idusuario),
         ]);
     }
 
@@ -63,7 +64,7 @@ class UsuarioReportefController extends Controller
         $model = new UsuarioReportef();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idusuario_reportef]);
+            return $this->redirect(['view', 'reporte_falla_idreporte_falla' => $model->reporte_falla_idreporte_falla, 'usuario_idusuario' => $model->usuario_idusuario]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,15 +75,16 @@ class UsuarioReportefController extends Controller
     /**
      * Updates an existing UsuarioReportef model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $reporte_falla_idreporte_falla
+     * @param integer $usuario_idusuario
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($reporte_falla_idreporte_falla, $usuario_idusuario)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($reporte_falla_idreporte_falla, $usuario_idusuario);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idusuario_reportef]);
+            return $this->redirect(['view', 'reporte_falla_idreporte_falla' => $model->reporte_falla_idreporte_falla, 'usuario_idusuario' => $model->usuario_idusuario]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,12 +95,13 @@ class UsuarioReportefController extends Controller
     /**
      * Deletes an existing UsuarioReportef model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $reporte_falla_idreporte_falla
+     * @param integer $usuario_idusuario
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($reporte_falla_idreporte_falla, $usuario_idusuario)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($reporte_falla_idreporte_falla, $usuario_idusuario)->delete();
 
         return $this->redirect(['index']);
     }
@@ -106,13 +109,14 @@ class UsuarioReportefController extends Controller
     /**
      * Finds the UsuarioReportef model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $reporte_falla_idreporte_falla
+     * @param integer $usuario_idusuario
      * @return UsuarioReportef the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($reporte_falla_idreporte_falla, $usuario_idusuario)
     {
-        if (($model = UsuarioReportef::findOne($id)) !== null) {
+        if (($model = UsuarioReportef::findOne(['reporte_falla_idreporte_falla' => $reporte_falla_idreporte_falla, 'usuario_idusuario' => $usuario_idusuario])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

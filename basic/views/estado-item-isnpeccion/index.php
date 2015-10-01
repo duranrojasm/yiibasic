@@ -25,12 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idestado_item_isnpeccion',
             'inspeccion_idinspeccion',
             'item_iditem',
             'fecha',
             'descrip_novedades',
-            // 'estado_items',
+            'estado_items',
             // 'valor_potencia_volt',
 
             ['class' => 'yii\grid\ActionColumn'],

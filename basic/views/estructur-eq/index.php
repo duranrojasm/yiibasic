@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idestructur_eq',
             'radio_idradio',
             'estructura_idestructura',
             'fecha',

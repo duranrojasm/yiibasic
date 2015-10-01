@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idusuario_imp_segdad') ?>
-
     <?= $form->field($model, 'implemento_segurd_idimplemento_segurd') ?>
 
     <?= $form->field($model, 'usuario_idusuario') ?>
@@ -25,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cantidad_req') ?>
 
-    <?php // echo $form->field($model, 'cantidad_tiene') ?>
+    <?= $form->field($model, 'cantidad_tiene') ?>
 
     <?php // echo $form->field($model, 'observacion') ?>
 

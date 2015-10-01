@@ -43,13 +43,14 @@ class RadioCaracController extends Controller
 
     /**
      * Displays a single RadioCarac model.
-     * @param integer $id
+     * @param integer $caracteristicasrad_idcaracteristicas
+     * @param integer $radio_idradio
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($caracteristicasrad_idcaracteristicas, $radio_idradio)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($caracteristicasrad_idcaracteristicas, $radio_idradio),
         ]);
     }
 
@@ -63,7 +64,7 @@ class RadioCaracController extends Controller
         $model = new RadioCarac();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idradio_carac]);
+            return $this->redirect(['view', 'caracteristicasrad_idcaracteristicas' => $model->caracteristicasrad_idcaracteristicas, 'radio_idradio' => $model->radio_idradio]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,15 +75,16 @@ class RadioCaracController extends Controller
     /**
      * Updates an existing RadioCarac model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $caracteristicasrad_idcaracteristicas
+     * @param integer $radio_idradio
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($caracteristicasrad_idcaracteristicas, $radio_idradio)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($caracteristicasrad_idcaracteristicas, $radio_idradio);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idradio_carac]);
+            return $this->redirect(['view', 'caracteristicasrad_idcaracteristicas' => $model->caracteristicasrad_idcaracteristicas, 'radio_idradio' => $model->radio_idradio]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,12 +95,13 @@ class RadioCaracController extends Controller
     /**
      * Deletes an existing RadioCarac model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $caracteristicasrad_idcaracteristicas
+     * @param integer $radio_idradio
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($caracteristicasrad_idcaracteristicas, $radio_idradio)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($caracteristicasrad_idcaracteristicas, $radio_idradio)->delete();
 
         return $this->redirect(['index']);
     }
@@ -106,13 +109,14 @@ class RadioCaracController extends Controller
     /**
      * Finds the RadioCarac model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $caracteristicasrad_idcaracteristicas
+     * @param integer $radio_idradio
      * @return RadioCarac the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($caracteristicasrad_idcaracteristicas, $radio_idradio)
     {
-        if (($model = RadioCarac::findOne($id)) !== null) {
+        if (($model = RadioCarac::findOne(['caracteristicasrad_idcaracteristicas' => $caracteristicasrad_idcaracteristicas, 'radio_idradio' => $radio_idradio])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

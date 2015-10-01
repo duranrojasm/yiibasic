@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "enlace_satelital_carac".
  *
- * @property integer $idenlace_satelital_carac
  * @property integer $caracteristica_es_idcaracteristica
  * @property integer $enlace_satelital_idenlace_satelital
  * @property string $valor
@@ -43,7 +42,6 @@ class EnlaceSatelitalCarac extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idenlace_satelital_carac' => 'Idenlace Satelital Carac',
             'caracteristica_es_idcaracteristica' => 'Caracteristica Es Idcaracteristica',
             'enlace_satelital_idenlace_satelital' => 'Enlace Satelital Idenlace Satelital',
             'valor' => 'Valor',

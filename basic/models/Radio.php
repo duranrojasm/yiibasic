@@ -21,13 +21,17 @@ use Yii;
  * @property integer $estacion_idestaciondos
  *
  * @property EstructurEq[] $estructurEqs
+ * @property Estructura[] $estructuraIdestructuras
+ * @property Inspeccion[] $inspeccions
  * @property ManteCorrectivo[] $manteCorrectivos
  * @property MantenimientoPreventivo[] $mantenimientoPreventivos
  * @property PartesRadio[] $partesRadios
  * @property Estacion $estacionIdestacion
+ * @property Estacion $estacionIdestacion0
  * @property Estacion $estacionIdestaciondos
  * @property Modelo $modeloIdmodelo
  * @property RadioCarac[] $radioCaracs
+ * @property Caracteristicasrad[] $caracteristicasradIdcaracteristicas
  */
 class Radio extends \yii\db\ActiveRecord
 {
@@ -86,6 +90,22 @@ class Radio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getEstructuraIdestructuras()
+    {
+        return $this->hasMany(Estructura::className(), ['idestructura' => 'estructura_idestructura'])->viaTable('estructur_eq', ['radio_idradio' => 'idradio']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInspeccions()
+    {
+        return $this->hasMany(Inspeccion::className(), ['radio_idradio' => 'idradio']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getManteCorrectivos()
     {
         return $this->hasMany(ManteCorrectivo::className(), ['radio_idradio' => 'idradio']);
@@ -118,6 +138,14 @@ class Radio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getEstacionIdestacion0()
+    {
+        return $this->hasOne(Estacion::className(), ['idestacion' => 'estacion_idestacion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEstacionIdestaciondos()
     {
         return $this->hasOne(Estacion::className(), ['idestacion' => 'estacion_idestaciondos']);
@@ -137,5 +165,13 @@ class Radio extends \yii\db\ActiveRecord
     public function getRadioCaracs()
     {
         return $this->hasMany(RadioCarac::className(), ['radio_idradio' => 'idradio']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCaracteristicasradIdcaracteristicas()
+    {
+        return $this->hasMany(Caracteristicasrad::className(), ['idcaracteristicasrad' => 'caracteristicasrad_idcaracteristicas'])->viaTable('radio_carac', ['radio_idradio' => 'idradio']);
     }
 }

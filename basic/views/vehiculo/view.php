@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'aviso',
             'obser_aviso',
             'fecha',
+            'estatus',
         ],
     ]) ?>
 

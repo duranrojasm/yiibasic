@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idenlace_satelital_carac') ?>
-
     <?= $form->field($model, 'caracteristica_es_idcaracteristica') ?>
 
     <?= $form->field($model, 'enlace_satelital_idenlace_satelital') ?>

@@ -19,7 +19,7 @@ class VehiculoSearch extends Vehiculo
     {
         return [
             [['idvehiculo', 'ano'], 'integer'],
-            [['control', 'placa', 'marca', 'modelo', 'unidad', 'estado', 'aviso', 'obser_aviso', 'fecha'], 'safe'],
+            [['control', 'placa', 'marca', 'modelo', 'unidad', 'estado', 'aviso', 'obser_aviso', 'fecha', 'estatus'], 'safe'],
         ];
     }
 
@@ -68,7 +68,8 @@ class VehiculoSearch extends Vehiculo
             ->andFilterWhere(['like', 'unidad', $this->unidad])
             ->andFilterWhere(['like', 'estado', $this->estado])
             ->andFilterWhere(['like', 'aviso', $this->aviso])
-            ->andFilterWhere(['like', 'obser_aviso', $this->obser_aviso]);
+            ->andFilterWhere(['like', 'obser_aviso', $this->obser_aviso])
+            ->andFilterWhere(['like', 'estatus', $this->estatus]);
 
         return $dataProvider;
     }

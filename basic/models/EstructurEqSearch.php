@@ -18,7 +18,7 @@ class EstructurEqSearch extends EstructurEq
     public function rules()
     {
         return [
-            [['idestructur_eq', 'radio_idradio', 'estructura_idestructura'], 'integer'],
+            [['radio_idradio', 'estructura_idestructura'], 'integer'],
             [['fecha', 'observacion'], 'safe'],
         ];
     }
@@ -56,7 +56,6 @@ class EstructurEqSearch extends EstructurEq
         }
 
         $query->andFilterWhere([
-            'idestructur_eq' => $this->idestructur_eq,
             'radio_idradio' => $this->radio_idradio,
             'estructura_idestructura' => $this->estructura_idestructura,
             'fecha' => $this->fecha,

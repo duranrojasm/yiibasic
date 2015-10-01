@@ -15,8 +15,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idradio_carac') ?>
-
     <?= $form->field($model, 'caracteristicasrad_idcaracteristicas') ?>
 
     <?= $form->field($model, 'radio_idradio') ?>

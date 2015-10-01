@@ -43,13 +43,14 @@ class EstructurEqController extends Controller
 
     /**
      * Displays a single EstructurEq model.
-     * @param integer $id
+     * @param integer $radio_idradio
+     * @param integer $estructura_idestructura
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($radio_idradio, $estructura_idestructura)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($radio_idradio, $estructura_idestructura),
         ]);
     }
 
@@ -63,7 +64,7 @@ class EstructurEqController extends Controller
         $model = new EstructurEq();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idestructur_eq]);
+            return $this->redirect(['view', 'radio_idradio' => $model->radio_idradio, 'estructura_idestructura' => $model->estructura_idestructura]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,15 +75,16 @@ class EstructurEqController extends Controller
     /**
      * Updates an existing EstructurEq model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $radio_idradio
+     * @param integer $estructura_idestructura
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($radio_idradio, $estructura_idestructura)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($radio_idradio, $estructura_idestructura);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idestructur_eq]);
+            return $this->redirect(['view', 'radio_idradio' => $model->radio_idradio, 'estructura_idestructura' => $model->estructura_idestructura]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,12 +95,13 @@ class EstructurEqController extends Controller
     /**
      * Deletes an existing EstructurEq model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $radio_idradio
+     * @param integer $estructura_idestructura
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($radio_idradio, $estructura_idestructura)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($radio_idradio, $estructura_idestructura)->delete();
 
         return $this->redirect(['index']);
     }
@@ -106,13 +109,14 @@ class EstructurEqController extends Controller
     /**
      * Finds the EstructurEq model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $radio_idradio
+     * @param integer $estructura_idestructura
      * @return EstructurEq the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($radio_idradio, $estructura_idestructura)
     {
-        if (($model = EstructurEq::findOne($id)) !== null) {
+        if (($model = EstructurEq::findOne(['radio_idradio' => $radio_idradio, 'estructura_idestructura' => $estructura_idestructura])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
