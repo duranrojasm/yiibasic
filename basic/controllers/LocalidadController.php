@@ -71,7 +71,7 @@ class LocalidadController extends Controller
     public function actionCreate()
     {
         $model = new Localidad();
-
+       
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idlocalidad]);
         } else {
