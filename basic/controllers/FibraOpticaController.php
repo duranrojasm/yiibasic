@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\FibraOptica;
+use app\models\FibraOpticaCarac;
 use app\models\FibraOpticaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,12 +62,14 @@ class FibraOpticaController extends Controller
     public function actionCreate()
     {
         $model = new FibraOptica();
+        $modelsFibraCaract = [new FibraOpticaCarac];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idfibra_optica]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelsFibraCaract' => (empty($modelsFibraCaract)) ? [new FibraOpticaCarac] : $modelsFibraCaract
             ]);
         }
     }

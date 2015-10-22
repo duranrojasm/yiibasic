@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'coordenada_idcoordenada')->textInput() ?>
-
     <?= $form->field($model, 'falla_idfalla')->textInput() ?>
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>

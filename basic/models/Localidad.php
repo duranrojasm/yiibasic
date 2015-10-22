@@ -46,7 +46,7 @@ class Localidad extends \yii\db\ActiveRecord
     {
         return [
             'idlocalidad' => 'Idlocalidad',
-            'localidad_idlocalidad' => 'Localidad Idlocalidad',
+            'localidad_idlocalidad' => 'Lugar',
             'nombre' => 'Nombre',
             'tipo' => 'Tipo',
         ];

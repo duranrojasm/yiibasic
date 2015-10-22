@@ -46,8 +46,8 @@ class PartesRadio extends \yii\db\ActiveRecord
     {
         return [
             'idpartes_radio' => 'Idpartes Radio',
-            'radio_idradio' => 'Radio Idradio',
-            'codigo' => 'Codigo',
+            'radio_idradio' => 'Radio',
+            'codigo' => 'Código',
             'nombre' => 'Nombre',
             'capacidad' => 'Capacidad',
         ];

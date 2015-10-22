@@ -45,7 +45,7 @@ class Modelo extends \yii\db\ActiveRecord
             'idmodelo' => 'Idmodelo',
             'nombre' => 'Nombre',
             'tipo' => 'Tipo',
-            'descripcion' => 'Descripcion',
+            'descripcion' => 'Descripción',
         ];
     }
 

@@ -45,6 +45,7 @@ class VehiculoSearch extends Vehiculo
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'pagination' => ['pageSize'=> isset(Yii::$app->params['defaultPageSize']) ? Yii::$app->params['defaultPageSize'] : 10,],
         ]);
 
         $this->load($params);

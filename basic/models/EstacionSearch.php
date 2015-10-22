@@ -18,7 +18,7 @@ class EstacionSearch extends Estacion
     public function rules()
     {
         return [
-            [['idestacion', 'coordenada_idcoordenada', 'localidad_idlocalidad', 'distancia'], 'integer'],
+            [['idestacion', 'localidad_idlocalidad', 'distancia'], 'integer'],
             [['codigo', 'nombre', 'tipo_central', 'telefono', 'direccion'], 'safe'],
             [['tiempo'], 'number'],
         ];
@@ -46,6 +46,7 @@ class EstacionSearch extends Estacion
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize'=> isset(Yii::$app->params['defaultPageSize']) ? Yii::$app->params['defaultPageSize'] : 10,],
         ]);
 
         $this->load($params);
@@ -58,7 +59,6 @@ class EstacionSearch extends Estacion
 
         $query->andFilterWhere([
             'idestacion' => $this->idestacion,
-            'coordenada_idcoordenada' => $this->coordenada_idcoordenada,
             'localidad_idlocalidad' => $this->localidad_idlocalidad,
             'distancia' => $this->distancia,
             'tiempo' => $this->tiempo,

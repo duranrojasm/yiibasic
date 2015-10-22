@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<?php echo ExportMenu::widget([
+<?php ExportMenu::widget([
     'dataProvider' => $dataProvider,
     'columns' => $gridColumns,
      'target' => ExportMenu::TARGET_BLANK,
      'exportConfig' => [
-        ExportMenu::FORMAT_PDF => false,
+        
                 ]
 ]);?>
 
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
          'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'pjaxSettings'=>[
            'neverTimeout'=>true,
-            'loadingCssClass'=>true,
+            //'loadingCssClass'=>true,
            
              ],
 
@@ -190,8 +190,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'type'=>'warning',
              //'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Crear Localidad', ['create'], ['class' => 'btn btn-success']),
             'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Actualizar', ['index'], ['class' => 'btn btn-warning btn-sm']),
-        'footer'=>true,
-        'footerOptions' => ['<h3>Localidades</h3>']
+        'footer'=>true
+       
         ],
 
 

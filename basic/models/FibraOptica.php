@@ -16,6 +16,8 @@ use Yii;
  * @property integer $periodo_mantenimiento
  * @property integer $estacion_idestaciondos
  * @property integer $nodo_idnododos
+ * @property integer $rango1
+ * @property integer $rango2
  *
  * @property EstacionFo[] $estacionFos
  * @property Estacion $estacionIdestacion
@@ -43,7 +45,7 @@ class FibraOptica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos'], 'integer'],
+            [['nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos', 'rango1', 'rango2'], 'integer'],
             [['nombre'], 'required'],
             [['distancia'], 'number'],
             [['nombre'], 'string', 'max' => 20],
@@ -66,6 +68,8 @@ class FibraOptica extends \yii\db\ActiveRecord
             'periodo_mantenimiento' => 'Periodo Mantenimiento',
             'estacion_idestaciondos' => 'Estacion Idestaciondos',
             'nodo_idnododos' => 'Nodo Idnododos',
+            'rango1' => 'Rango1',
+            'rango2' => 'Rango2',
         ];
     }
 

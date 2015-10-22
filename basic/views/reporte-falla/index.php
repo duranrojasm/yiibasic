@@ -26,11 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'idreporte_falla',
-            'coordenada_idcoordenada',
             'falla_idfalla',
             'descripcion',
             'ptos_referencia',
-            // 'fecha_inicio',
+            'fecha_inicio',
             // 'fecha_fin',
             // 'estatus',
             // 'distancia',

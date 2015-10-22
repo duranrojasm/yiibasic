@@ -37,6 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'periodo_mantenimiento',
             'estacion_idestaciondos',
             'nodo_idnododos',
+            'rango1',
+            'rango2',
         ],
     ]) ?>
 

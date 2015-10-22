@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Coordenada;
 use app\models\Estacion;
 use app\models\EstacionSearch;
 use yii\web\Controller;
@@ -61,12 +62,20 @@ class EstacionController extends Controller
     public function actionCreate()
     {
         $model = new Estacion();
+        $coord = new Coordenada();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $coord->load(Yii::$app->request->post())) {
+
+            $model->save(false);
+            $coord->estacion = $model->idestacion;
+            $coord->save();
+
+
             return $this->redirect(['view', 'id' => $model->idestacion]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'coord' => $coord,
             ]);
         }
     }
@@ -80,6 +89,7 @@ class EstacionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idestacion]);

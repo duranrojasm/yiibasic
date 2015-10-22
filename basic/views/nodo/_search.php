@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idnodo') ?>
 
-    <?= $form->field($model, 'coordenada_idcoordenada') ?>
-
     <?= $form->field($model, 'estacion_idestacion') ?>
 
     <?= $form->field($model, 'tipo') ?>
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?php // echo $form->field($model, 'direccion') ?>
+    <?= $form->field($model, 'direccion') ?>
 
     <?php // echo $form->field($model, 'identificacion') ?>
 

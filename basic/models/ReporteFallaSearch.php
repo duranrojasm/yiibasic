@@ -18,7 +18,7 @@ class ReporteFallaSearch extends ReporteFalla
     public function rules()
     {
         return [
-            [['idreporte_falla', 'coordenada_idcoordenada', 'falla_idfalla'], 'integer'],
+            [['idreporte_falla', 'falla_idfalla'], 'integer'],
             [['descripcion', 'ptos_referencia', 'fecha_inicio', 'fecha_fin', 'estatus', 'urgencia'], 'safe'],
             [['distancia'], 'number'],
         ];
@@ -58,7 +58,6 @@ class ReporteFallaSearch extends ReporteFalla
 
         $query->andFilterWhere([
             'idreporte_falla' => $this->idreporte_falla,
-            'coordenada_idcoordenada' => $this->coordenada_idcoordenada,
             'falla_idfalla' => $this->falla_idfalla,
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,

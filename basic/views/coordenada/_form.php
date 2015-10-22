@@ -18,6 +18,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'asnm')->textInput() ?>
 
+    <?= $form->field($model, 'reportefalla')->textInput() ?>
+
+    <?= $form->field($model, 'estacion')->textInput() ?>
+
+    <?= $form->field($model, 'nodo')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

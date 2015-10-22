@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idreporte_falla') ?>
 
-    <?= $form->field($model, 'coordenada_idcoordenada') ?>
-
     <?= $form->field($model, 'falla_idfalla') ?>
 
     <?= $form->field($model, 'descripcion') ?>
 
     <?= $form->field($model, 'ptos_referencia') ?>
 
-    <?php // echo $form->field($model, 'fecha_inicio') ?>
+    <?= $form->field($model, 'fecha_inicio') ?>
 
     <?php // echo $form->field($model, 'fecha_fin') ?>
 

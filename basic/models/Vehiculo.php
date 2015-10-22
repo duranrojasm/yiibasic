@@ -59,13 +59,13 @@ class Vehiculo extends \yii\db\ActiveRecord
             'placa' => 'Placa',
             'marca' => 'Marca',
             'modelo' => 'Modelo',
-            'ano' => 'Ano',
+            'ano' => 'Año',
             'unidad' => 'Unidad',
             'estado' => 'Estado',
             'aviso' => 'Aviso',
-            'obser_aviso' => 'Obser Aviso',
-            'fecha' => 'Fecha',
-            'estatus' => 'Estatus',
+            'obser_aviso' => 'Ob. Aviso',
+            'fecha' => 'Fecha Av.',
+            'estatus' => 'Disponibilidad',
         ];
     }
 

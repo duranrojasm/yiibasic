@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'idnodo',
-            'coordenada_idcoordenada',
             'estacion_idestacion',
             'tipo',
             'nombre',

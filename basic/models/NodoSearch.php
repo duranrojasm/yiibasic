@@ -18,7 +18,7 @@ class NodoSearch extends Nodo
     public function rules()
     {
         return [
-            [['idnodo', 'coordenada_idcoordenada', 'estacion_idestacion'], 'integer'],
+            [['idnodo', 'estacion_idestacion'], 'integer'],
             [['tipo', 'nombre', 'direccion', 'identificacion', 'contacto_red', 'contacto_mant'], 'safe'],
         ];
     }
@@ -45,6 +45,7 @@ class NodoSearch extends Nodo
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'pagination' => ['pageSize'=> isset(Yii::$app->params['defaultPageSize']) ? Yii::$app->params['defaultPageSize'] : 10,],
         ]);
 
         $this->load($params);
@@ -57,7 +58,6 @@ class NodoSearch extends Nodo
 
         $query->andFilterWhere([
             'idnodo' => $this->idnodo,
-            'coordenada_idcoordenada' => $this->coordenada_idcoordenada,
             'estacion_idestacion' => $this->estacion_idestacion,
         ]);
 

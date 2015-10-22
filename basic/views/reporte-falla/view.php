@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'idreporte_falla',
-            'coordenada_idcoordenada',
             'falla_idfalla',
             'descripcion',
             'ptos_referencia',

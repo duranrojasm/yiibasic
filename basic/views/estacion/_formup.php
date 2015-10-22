@@ -69,12 +69,7 @@ $data =  ArrayHelper::map(Localidad::find()->where(['=', 'tipo', 'Municipio'])->
 
     <?= $form->field($model, 'tiempo')->textInput(['maxlength' => true,'placeholder' => 'Ej. 90'])->label('Tiempo (Min)'); ?>
 
-    <?= $form->field($coord, 'latitud')->textInput(['maxlength' => true,'placeholder' => 'Ej. 90'])->label('Latitud'); ?>
-
-    <?= $form->field($coord, 'longitud')->textInput(['maxlength' => true,'placeholder' => 'Ej. 90'])->label('Longitud');?>
-
-    <?= $form->field($coord, 'asnm')->textInput(['maxlength' => true,'placeholder' => 'Ej. 90'])->label('Asnm'); ?>
-
+  
     </div>
 
   <div style="width:50%;float:left;padding-right:115%;top:10px;position: relative;left:150px">

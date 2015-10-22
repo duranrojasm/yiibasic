@@ -21,11 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'rol_idrol') ?>
 
-    <?= $form->field($model, 'vehiculo_idvehiculo') ?>
-
     <?= $form->field($model, 'nombre') ?>
 
-    <?php // echo $form->field($model, 'apellido') ?>
+    <?= $form->field($model, 'apellido') ?>
 
     <?php // echo $form->field($model, 'cedula') ?>
 

@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idestacion') ?>
 
-    <?= $form->field($model, 'coordenada_idcoordenada') ?>
-
     <?= $form->field($model, 'localidad_idlocalidad') ?>
 
     <?= $form->field($model, 'codigo') ?>
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?php // echo $form->field($model, 'tipo_central') ?>
+    <?= $form->field($model, 'tipo_central') ?>
 
     <?php // echo $form->field($model, 'telefono') ?>
 

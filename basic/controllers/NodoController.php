@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Nodo;
+use app\models\Coordenada;
 use app\models\NodoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,12 +62,19 @@ class NodoController extends Controller
     public function actionCreate()
     {
         $model = new Nodo();
+        $coord = new Coordenada();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $coord->load(Yii::$app->request->post())) {
+
+            $model->save(false);
+            $coord->nodo = $model->idnodo;
+            $coord->save();
+
             return $this->redirect(['view', 'id' => $model->idnodo]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'coord' => $coord,
             ]);
         }
     }

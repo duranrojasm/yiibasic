@@ -12,6 +12,7 @@ use Yii;
  * @property string $observacion
  *
  * @property UsuarioImpSegdad[] $usuarioImpSegdads
+ * @property Usuario[] $usuarioIdusuarios
  */
 class ImplementoSegurd extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class ImplementoSegurd extends \yii\db\ActiveRecord
         return [
             [['nombre'], 'required'],
             [['nombre'], 'string', 'max' => 50],
-            [['observacion'], 'string', 'max' => 20]
+            [['observacion'], 'string', 'max' => 80]
         ];
     }
 
@@ -43,7 +44,7 @@ class ImplementoSegurd extends \yii\db\ActiveRecord
         return [
             'idimplemento_segurd' => 'Idimplemento Segurd',
             'nombre' => 'Nombre',
-            'observacion' => 'Observacion',
+            'observacion' => 'Observación',
         ];
     }
 
@@ -53,5 +54,13 @@ class ImplementoSegurd extends \yii\db\ActiveRecord
     public function getUsuarioImpSegdads()
     {
         return $this->hasMany(UsuarioImpSegdad::className(), ['implemento_segurd_idimplemento_segurd' => 'idimplemento_segurd']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarioIdusuarios()
+    {
+        return $this->hasMany(Usuario::className(), ['idusuario' => 'usuario_idusuario'])->viaTable('usuario_imp_segdad', ['implemento_segurd_idimplemento_segurd' => 'idimplemento_segurd']);
     }
 }

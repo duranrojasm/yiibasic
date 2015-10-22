@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'latitud',
             'longitud',
             'asnm',
+            'reportefalla',
+            'estacion',
+            'nodo',
         ],
     ]) ?>
 

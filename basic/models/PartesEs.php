@@ -44,7 +44,7 @@ class PartesEs extends \yii\db\ActiveRecord
     {
         return [
             'idpartes_es' => 'Idpartes Es',
-            'enlace_satelital_idenlace_satelital' => 'Enlace Satelital Idenlace Satelital',
+            'enlace_satelital_idenlace_satelital' => 'Enlace Satelital',
             'nombre' => 'Nombre',
             'serial' => 'Serial',
         ];

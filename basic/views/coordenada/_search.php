@@ -23,6 +23,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'asnm') ?>
 
+    <?= $form->field($model, 'reportefalla') ?>
+
+    <?php // echo $form->field($model, 'estacion') ?>
+
+    <?php // echo $form->field($model, 'nodo') ?>
+
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

@@ -18,7 +18,7 @@ class UsuarioSearch extends Usuario
     public function rules()
     {
         return [
-            [['idusuario', 'estacion_idestacion', 'rol_idrol', 'vehiculo_idvehiculo'], 'integer'],
+            [['idusuario', 'estacion_idestacion', 'rol_idrol'], 'integer'],
             [['nombre', 'apellido', 'cedula', 'num_sap', 'carnet', 'telefono_cel', 'telefono_hab', 'cargo', 'correo', 'gerencia_general', 'gerencia', 'departamento'], 'safe'],
             [['disponibilidad'], 'boolean'],
         ];
@@ -46,6 +46,7 @@ class UsuarioSearch extends Usuario
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize'=> isset(Yii::$app->params['defaultPageSize']) ? Yii::$app->params['defaultPageSize'] : 10,],
         ]);
 
         $this->load($params);
@@ -60,7 +61,6 @@ class UsuarioSearch extends Usuario
             'idusuario' => $this->idusuario,
             'estacion_idestacion' => $this->estacion_idestacion,
             'rol_idrol' => $this->rol_idrol,
-            'vehiculo_idvehiculo' => $this->vehiculo_idvehiculo,
             'disponibilidad' => $this->disponibilidad,
         ]);
 

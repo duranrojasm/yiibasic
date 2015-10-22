@@ -11,10 +11,13 @@ use Yii;
  * @property string $latitud
  * @property string $longitud
  * @property double $asnm
+ * @property integer $reportefalla
+ * @property integer $estacion
+ * @property integer $nodo
  *
- * @property Estacion[] $estacions
- * @property Nodo[] $nodos
- * @property ReporteFalla[] $reporteFallas
+ * @property Estacion $estacion0
+ * @property Nodo $nodo0
+ * @property ReporteFalla $reportefalla0
  */
 class Coordenada extends \yii\db\ActiveRecord
 {
@@ -34,6 +37,7 @@ class Coordenada extends \yii\db\ActiveRecord
         return [
             [['latitud', 'longitud'], 'required'],
             [['asnm'], 'number'],
+            [['reportefalla', 'estacion', 'nodo'], 'integer'],
             [['latitud', 'longitud'], 'string', 'max' => 20]
         ];
     }
@@ -48,30 +52,33 @@ class Coordenada extends \yii\db\ActiveRecord
             'latitud' => 'Latitud',
             'longitud' => 'Longitud',
             'asnm' => 'Asnm',
+            'reportefalla' => 'Reportefalla',
+            'estacion' => 'Estacion',
+            'nodo' => 'Nodo',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstacions()
+    public function getEstacion0()
     {
-        return $this->hasMany(Estacion::className(), ['coordenada_idcoordenada' => 'idcoordenada']);
+        return $this->hasOne(Estacion::className(), ['idestacion' => 'estacion']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNodos()
+    public function getNodo0()
     {
-        return $this->hasMany(Nodo::className(), ['coordenada_idcoordenada' => 'idcoordenada']);
+        return $this->hasOne(Nodo::className(), ['idnodo' => 'nodo']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getReporteFallas()
+    public function getReportefalla0()
     {
-        return $this->hasMany(ReporteFalla::className(), ['coordenada_idcoordenada' => 'idcoordenada']);
+        return $this->hasOne(ReporteFalla::className(), ['idreporte_falla' => 'reportefalla']);
     }
 }

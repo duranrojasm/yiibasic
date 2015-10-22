@@ -18,7 +18,7 @@ class FibraOpticaSearch extends FibraOptica
     public function rules()
     {
         return [
-            [['idfibra_optica', 'nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos'], 'integer'],
+            [['idfibra_optica', 'nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos', 'rango1', 'rango2'], 'integer'],
             [['nombre', 'observacion'], 'safe'],
             [['distancia'], 'number'],
         ];
@@ -64,6 +64,8 @@ class FibraOpticaSearch extends FibraOptica
             'periodo_mantenimiento' => $this->periodo_mantenimiento,
             'estacion_idestaciondos' => $this->estacion_idestaciondos,
             'nodo_idnododos' => $this->nodo_idnododos,
+            'rango1' => $this->rango1,
+            'rango2' => $this->rango2,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

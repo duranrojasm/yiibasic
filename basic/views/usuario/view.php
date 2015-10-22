@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'idusuario',
             'estacion_idestacion',
             'rol_idrol',
-            'vehiculo_idvehiculo',
             'nombre',
             'apellido',
             'cedula',

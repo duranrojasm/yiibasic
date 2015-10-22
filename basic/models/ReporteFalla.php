@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "reporte_falla".
  *
  * @property integer $idreporte_falla
- * @property integer $coordenada_idcoordenada
  * @property integer $falla_idfalla
  * @property string $descripcion
  * @property string $ptos_referencia
@@ -18,12 +17,15 @@ use Yii;
  * @property double $distancia
  * @property string $urgencia
  *
+ * @property Coordenada[] $coordenadas
  * @property DetalleProyecto[] $detalleProyectos
  * @property ManteCorrectivo[] $manteCorrectivos
  * @property RecursoFalla[] $recursoFallas
- * @property Coordenada $coordenadaIdcoordenada
  * @property Falla $fallaIdfalla
  * @property UsuarioReportef[] $usuarioReportefs
+ * @property Usuario[] $usuarioIdusuarios
+ * @property VehiculoReportef[] $vehiculoReportefs
+ * @property Vehiculo[] $vehiculoIdvehiculos
  */
 class ReporteFalla extends \yii\db\ActiveRecord
 {
@@ -41,8 +43,8 @@ class ReporteFalla extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coordenada_idcoordenada', 'falla_idfalla', 'descripcion', 'fecha_inicio', 'fecha_fin', 'estatus', 'urgencia'], 'required'],
-            [['coordenada_idcoordenada', 'falla_idfalla'], 'integer'],
+            [['falla_idfalla', 'descripcion', 'fecha_inicio', 'fecha_fin', 'estatus', 'urgencia'], 'required'],
+            [['falla_idfalla'], 'integer'],
             [['fecha_inicio', 'fecha_fin'], 'safe'],
             [['distancia'], 'number'],
             [['descripcion', 'ptos_referencia'], 'string', 'max' => 50],
@@ -57,7 +59,6 @@ class ReporteFalla extends \yii\db\ActiveRecord
     {
         return [
             'idreporte_falla' => 'Idreporte Falla',
-            'coordenada_idcoordenada' => 'Coordenada Idcoordenada',
             'falla_idfalla' => 'Falla Idfalla',
             'descripcion' => 'Descripcion',
             'ptos_referencia' => 'Ptos Referencia',
@@ -67,6 +68,14 @@ class ReporteFalla extends \yii\db\ActiveRecord
             'distancia' => 'Distancia',
             'urgencia' => 'Urgencia',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCoordenadas()
+    {
+        return $this->hasMany(Coordenada::className(), ['reportefalla' => 'idreporte_falla']);
     }
 
     /**
@@ -96,14 +105,6 @@ class ReporteFalla extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCoordenadaIdcoordenada()
-    {
-        return $this->hasOne(Coordenada::className(), ['idcoordenada' => 'coordenada_idcoordenada']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getFallaIdfalla()
     {
         return $this->hasOne(Falla::className(), ['idfalla' => 'falla_idfalla']);
@@ -115,5 +116,29 @@ class ReporteFalla extends \yii\db\ActiveRecord
     public function getUsuarioReportefs()
     {
         return $this->hasMany(UsuarioReportef::className(), ['reporte_falla_idreporte_falla' => 'idreporte_falla']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarioIdusuarios()
+    {
+        return $this->hasMany(Usuario::className(), ['idusuario' => 'usuario_idusuario'])->viaTable('usuario_reportef', ['reporte_falla_idreporte_falla' => 'idreporte_falla']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculoReportefs()
+    {
+        return $this->hasMany(VehiculoReportef::className(), ['reporte_falla_idreporte_falla' => 'idreporte_falla']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculoIdvehiculos()
+    {
+        return $this->hasMany(Vehiculo::className(), ['idvehiculo' => 'vehiculo_idvehiculo'])->viaTable('vehiculo_reportef', ['reporte_falla_idreporte_falla' => 'idreporte_falla']);
     }
 }

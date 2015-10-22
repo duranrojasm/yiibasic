@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "estacion".
  *
  * @property integer $idestacion
- * @property integer $coordenada_idcoordenada
  * @property integer $localidad_idlocalidad
  * @property string $codigo
  * @property string $nombre
@@ -18,9 +17,10 @@ use Yii;
  * @property integer $distancia
  * @property double $tiempo
  *
+ * @property Coordenada[] $coordenadas
  * @property EnlaceSatelital[] $enlaceSatelitals
  * @property EnlaceSatelital[] $enlaceSatelitals0
- * @property Coordenada $coordenadaIdcoordenada
+ * @property EnlaceSatelital[] $enlaceSatelitals1
  * @property Localidad $localidadIdlocalidad
  * @property EstacionFo[] $estacionFos
  * @property Estructura[] $estructuras
@@ -31,6 +31,7 @@ use Yii;
  * @property Nodo[] $nodos
  * @property Radio[] $radios
  * @property Radio[] $radios0
+ * @property Radio[] $radios1
  * @property Usuario[] $usuarios
  */
 class Estacion extends \yii\db\ActiveRecord
@@ -49,8 +50,8 @@ class Estacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coordenada_idcoordenada', 'localidad_idlocalidad', 'codigo', 'nombre'], 'required'],
-            [['coordenada_idcoordenada', 'localidad_idlocalidad', 'distancia'], 'integer'],
+            [['localidad_idlocalidad', 'codigo', 'nombre'], 'required'],
+            [['localidad_idlocalidad', 'distancia'], 'integer'],
             [['tiempo'], 'number'],
             [['codigo'], 'string', 'max' => 30],
             [['nombre', 'telefono'], 'string', 'max' => 50],
@@ -66,16 +67,23 @@ class Estacion extends \yii\db\ActiveRecord
     {
         return [
             'idestacion' => 'Idestacion',
-            'coordenada_idcoordenada' => 'Coordenada Idcoordenada',
-            'localidad_idlocalidad' => 'Localidad Idlocalidad',
-            'codigo' => 'Codigo',
+            'localidad_idlocalidad' => 'Ubicación',
+            'codigo' => 'Código',
             'nombre' => 'Nombre',
             'tipo_central' => 'Tipo Central',
-            'telefono' => 'Telefono',
-            'direccion' => 'Direccion',
-            'distancia' => 'Distancia',
-            'tiempo' => 'Tiempo',
+            'telefono' => 'Telf.',
+            'direccion' => 'Dirección',
+            'distancia' => 'Distancia (Km)',
+            'tiempo' => 'Tiempo (Hrs)',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCoordenadas()
+    {
+        return $this->hasMany(Coordenada::className(), ['estacion' => 'idestacion']);
     }
 
     /**
@@ -97,9 +105,9 @@ class Estacion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCoordenadaIdcoordenada()
+    public function getEnlaceSatelitals1()
     {
-        return $this->hasOne(Coordenada::className(), ['idcoordenada' => 'coordenada_idcoordenada']);
+        return $this->hasMany(EnlaceSatelital::className(), ['estacion_idestaciondos' => 'idestacion']);
     }
 
     /**
@@ -180,6 +188,14 @@ class Estacion extends \yii\db\ActiveRecord
     public function getRadios0()
     {
         return $this->hasMany(Radio::className(), ['estacion_idestacion' => 'idestacion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRadios1()
+    {
+        return $this->hasMany(Radio::className(), ['estacion_idestaciondos' => 'idestacion']);
     }
 
     /**

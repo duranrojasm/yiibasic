@@ -18,7 +18,7 @@ class CoordenadaSearch extends Coordenada
     public function rules()
     {
         return [
-            [['idcoordenada'], 'integer'],
+            [['idcoordenada', 'reportefalla', 'estacion', 'nodo'], 'integer'],
             [['latitud', 'longitud'], 'safe'],
             [['asnm'], 'number'],
         ];
@@ -46,6 +46,7 @@ class CoordenadaSearch extends Coordenada
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'pagination' => ['pageSize'=> isset(Yii::$app->params['defaultPageSize']) ? Yii::$app->params['defaultPageSize'] : 10,],
         ]);
 
         $this->load($params);
@@ -59,6 +60,9 @@ class CoordenadaSearch extends Coordenada
         $query->andFilterWhere([
             'idcoordenada' => $this->idcoordenada,
             'asnm' => $this->asnm,
+            'reportefalla' => $this->reportefalla,
+            'estacion' => $this->estacion,
+            'nodo' => $this->nodo,
         ]);
 
         $query->andFilterWhere(['like', 'latitud', $this->latitud])
