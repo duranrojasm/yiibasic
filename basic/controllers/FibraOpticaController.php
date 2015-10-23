@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\FibraOptica;
+use app\models\Model;
 use app\models\FibraOpticaCarac;
 use app\models\FibraOpticaSearch;
 use yii\web\Controller;
@@ -65,7 +66,38 @@ class FibraOpticaController extends Controller
         $modelsFibraCaract = [new FibraOpticaCarac];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idfibra_optica]);
+
+            $modelsFibraCaract = Model::createMultiple(FibraOpticaCarac::classname());
+            Model::loadMultiple($modelsFibraCaract, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsFibraCaract) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelsFibraCaract as $modelsFibraCaract) 
+                        {
+                            $modelsFibraCaract->fibra_optica_idfibra_optica = $model->idfibra_optica;
+                            if (! ($flag = $modelsFibraCaract->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->idfibra_optica]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
+
+            //return $this->redirect(['view', 'id' => $model->idfibra_optica]);
         } else {
             return $this->render('create', [
                 'model' => $model,

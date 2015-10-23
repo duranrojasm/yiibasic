@@ -40,4 +40,8 @@ class Model extends \yii\base\Model
 
         return $models;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

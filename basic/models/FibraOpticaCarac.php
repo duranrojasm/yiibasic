@@ -30,7 +30,7 @@ class FibraOpticaCarac extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['caracteristica_fo_idcaracteristica', 'fibra_optica_idfibra_optica', 'valor'], 'required'],
+            [['caracteristica_fo_idcaracteristica', 'valor'], 'required'],
             [['caracteristica_fo_idcaracteristica', 'fibra_optica_idfibra_optica'], 'integer'],
             [['valor'], 'string', 'max' => 30]
         ];
@@ -42,7 +42,7 @@ class FibraOpticaCarac extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'caracteristica_fo_idcaracteristica' => 'Caracteristica Fo Idcaracteristica',
+            'caracteristica_fo_idcaracteristica' => 'Datos',
             'fibra_optica_idfibra_optica' => 'Fibra Optica Idfibra Optica',
             'valor' => 'Valor',
         ];
