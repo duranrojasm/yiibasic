@@ -60,16 +60,16 @@ class FibraOptica extends \yii\db\ActiveRecord
     {
         return [
             'idfibra_optica' => 'Idfibra Optica',
-            'nodo_idnodo' => 'Nodo Idnodo',
-            'estacion_idestacion' => 'Estacion Idestacion',
+            'nodo_idnodo' => 'Nodo Orig',
+            'estacion_idestacion' => 'Estacion Orig',
             'nombre' => 'Nombre',
             'distancia' => 'Distancia',
-            'observacion' => 'Observacion',
-            'periodo_mantenimiento' => 'Periodo Mantenimiento',
-            'estacion_idestaciondos' => 'Estacion Idestaciondos',
-            'nodo_idnododos' => 'Nodo Idnododos',
-            'rango1' => 'Rango1',
-            'rango2' => 'Rango2',
+            'observacion' => 'Observación',
+            'periodo_mantenimiento' => 'Periodo Mant.',
+            'estacion_idestaciondos' => 'Estacion Dest',
+            'nodo_idnododos' => 'Nodo Dest',
+            'rango1' => 'Num de Fibra Inicio',
+            'rango2' => 'Num de Fibra Fin',
         ];
     }
 

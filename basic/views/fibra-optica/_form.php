@@ -19,6 +19,16 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
 $data =  ArrayHelper::map(Estacion::find()->all(),'idestacion','nombre');
 $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
+$items = ['1'=> '1', '2'=>'2','3'=>'3','4'=> '4', '5'=>'5','6'=>'6','7'=> '7', '8'=>'8','9'=>'9','10'=> '10', '11'=>'11','12'=>'12',
+'13'=> '13', '14'=>'14','15'=>'15','16'=> '16', '17'=>'17','18'=>'18','19'=> '19', '20'=>'20','21'=>'21','22'=> '22', '23'=>'23','24'=>'24',
+'25'=> '25', '26'=>'26','27'=>'27','28'=> '28', '29'=>'29','30'=>'30','31'=> '31', '32'=>'32','33'=>'33','34'=> '34', '35'=>'35','36'=>'36',
+'37'=> '37', '38'=>'38','39'=>'39','40'=> '40', '41'=>'41','42'=>'42','43'=> '43', '44'=>'44','45'=>'45','46'=> '46', '47'=>'47','48'=>'48',
+
+
+
+
+
+];
 
 ?>
 <div class="fibra-optica-form">
@@ -50,7 +60,7 @@ $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                 'allowClear' => true
         ],
        
-    ])->label('Estación #1');
+    ])->label('Estación Orig.');
     ?> 
 
       <?= $form->field($model, 'estacion_idestaciondos')->widget(Select2::classname(), [
@@ -63,7 +73,7 @@ $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                 'allowClear' => true
         ],
        
-    ])->label('Estación #2');
+    ])->label('Estación Dest.');
     ?> 
 
       <?= $form->field($model, 'nodo_idnodo')->widget(Select2::classname(), [
@@ -76,7 +86,7 @@ $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                 'allowClear' => true
         ],
        
-    ])->label('Nodo #1');
+    ])->label('Nodo Orig.');
     ?> 
 
       <?= $form->field($model, 'nodo_idnododos')->widget(Select2::classname(), [
@@ -89,22 +99,21 @@ $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                 'allowClear' => true
         ],
        
-    ])->label('Nodo #2');
+    ])->label('Nodo Dest.');
     ?> 
 
-     <?= $form->field($model, 'estacion_idestacion')->textInput() ?>
+     
+    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true,'placeholder' => 'Ej. S/C - SJK'])->label('Nombre'); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'distancia')->textInput(['maxlength' => true,'placeholder' => 'Ej. 34'])->label('Distancia (Km)'); ?>
 
-    <?= $form->field($model, 'distancia')->textInput() ?>
+    <?= $form->field($model, 'observacion')->textInput(['maxlength' => true,'placeholder' => 'Ej. Pto de Referencia'])->label('Observación'); ?>
 
-    <?= $form->field($model, 'observacion')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'periodo_mantenimiento')->textInput(['maxlength' => true,'placeholder' => 'Ej. 16'])->label('Período de Mantem.'); ?>
 
-    <?= $form->field($model, 'periodo_mantenimiento')->textInput() ?>
+    <?= $form->field($model, 'rango1')->dropDownList($items,['prompt'=>'Seleccione un número de fibra','id'=>'user_dropdown'])->label('Num. de Fibra incio');  ?>
 
-    <?= $form->field($model, 'rango1')->textInput() ?>
-
-    <?= $form->field($model, 'rango2')->textInput() ?>
+    <?= $form->field($model, 'rango2')->dropDownList($items,['prompt'=>'Seleccione un número de fibra','id'=>'user_dropdown'])->label('Num. de Fibra fin');  ?>
 
 
 </div>
@@ -155,10 +164,11 @@ $data2 =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                     
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelsFibraCaract, "[{$i}]caracteristica_fo_idcaracteristica")->dropDownList( ArrayHelper::map(CaracteristicaFo::find()->all(),'idcaracteristica_fo','nombre')) ?>
+                                <?= $form->field($modelsFibraCaract, "[{$i}]caracteristica_fo_idcaracteristica")->dropDownList(
+                                ArrayHelper::map(CaracteristicaFo::find()->all(),'idcaracteristica_fo','nombre'),['prompt'=>'Seleccione una opc','id'=>'user_dropdown'])->label('Característica'); ?>
                             </div>
                             <div class="col-sm-6">
-                                <?= $form->field($modelsFibraCaract, "[{$i}]valor")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelsFibraCaract, "[{$i}]valor")->textInput(['maxlength' => true])->label('Valor'); ?>
                             </div>
                         </div><!-- .row -->
                        
