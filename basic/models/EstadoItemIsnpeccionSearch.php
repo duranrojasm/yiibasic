@@ -19,7 +19,7 @@ class EstadoItemIsnpeccionSearch extends EstadoItemIsnpeccion
     {
         return [
             [['inspeccion_idinspeccion', 'item_iditem'], 'integer'],
-            [['fecha', 'descrip_novedades', 'estado_items'], 'safe'],
+            [['fecha', 'descrip_novedades', 'estado_items', 'valor'], 'safe'],
             [['valor_potencia_volt'], 'number'],
         ];
     }
@@ -64,7 +64,8 @@ class EstadoItemIsnpeccionSearch extends EstadoItemIsnpeccion
         ]);
 
         $query->andFilterWhere(['like', 'descrip_novedades', $this->descrip_novedades])
-            ->andFilterWhere(['like', 'estado_items', $this->estado_items]);
+            ->andFilterWhere(['like', 'estado_items', $this->estado_items])
+            ->andFilterWhere(['like', 'valor', $this->valor]);
 
         return $dataProvider;
     }

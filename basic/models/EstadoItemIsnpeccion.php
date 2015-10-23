@@ -13,6 +13,7 @@ use Yii;
  * @property string $descrip_novedades
  * @property string $estado_items
  * @property double $valor_potencia_volt
+ * @property string $valor
  *
  * @property Inspeccion $inspeccionIdinspeccion
  * @property Item $itemIditem
@@ -33,12 +34,13 @@ class EstadoItemIsnpeccion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['inspeccion_idinspeccion', 'item_iditem'], 'required'],
+            [[ 'item_iditem'], 'required'],
             [['inspeccion_idinspeccion', 'item_iditem'], 'integer'],
             [['fecha'], 'safe'],
             [['valor_potencia_volt'], 'number'],
             [['descrip_novedades'], 'string', 'max' => 30],
-            [['estado_items'], 'string', 'max' => 10]
+            [['estado_items'], 'string', 'max' => 10],
+            [['valor'], 'string', 'max' => 45]
         ];
     }
 
@@ -54,6 +56,7 @@ class EstadoItemIsnpeccion extends \yii\db\ActiveRecord
             'descrip_novedades' => 'Descrip Novedades',
             'estado_items' => 'Estado Items',
             'valor_potencia_volt' => 'Valor Potencia Volt',
+            'valor' => 'Valor',
         ];
     }
 

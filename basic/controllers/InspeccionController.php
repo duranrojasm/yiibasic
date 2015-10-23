@@ -5,9 +5,14 @@ namespace app\controllers;
 use Yii;
 use app\models\Inspeccion;
 use app\models\InspeccionSearch;
+use app\models\EstadoItemIsnpeccion;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Model;
+use app\models\Address;
+use app\models\EntryForm;
+
 
 /**
  * InspeccionController implements the CRUD actions for Inspeccion model.
@@ -61,12 +66,47 @@ class InspeccionController extends Controller
     public function actionCreate()
     {
         $model = new Inspeccion();
+        $modelsEstadoItemIns = [new EstadoItemIsnpeccion];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idinspeccion]);
+
+
+
+             $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname());
+            Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsEstadoItemIns) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelsEstadoItemIns as $modelsEstadoItemIns) {
+                            $modelsEstadoItemIns->inspeccion_idinspeccion = $model->idinspeccion;
+                            if (! ($flag = $modelsEstadoItemIns->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->idinspeccion]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
+
+
+
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelsEstadoItemIns' => (empty($modelsEstadoItemIns)) ? [new EstadoItemIsnpeccion] : $modelsEstadoItemIns
             ]);
         }
     }
@@ -80,12 +120,58 @@ class InspeccionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelsEstadoItemIns = $model->idinspeccion;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idinspeccion]);
+
+         if ($model->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsEstadoItemIns, 'id', 'id');
+            $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname(), $modelsEstadoItemIns);
+            Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsEstadoItemIns, 'id', 'id')));
+
+            // ajax validation
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(
+                    ActiveForm::validateMultiple($modelsEstadoItemIns),
+                    ActiveForm::validate($model)
+                );
+            }
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsEstadoItemIns) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (! empty($deletedIDs)) {
+                            EstadoItemIsnpeccion::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsEstadoItemIns as $modelsEstadoItemIns) {
+                            $modelsEstadoItemIns->inspeccion_idinspeccion = $model->idinspeccion;
+
+                            if (! ($flag = $modelAddress->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->idinspeccion]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelsEstadoI' => (empty($modelsEstadoI)) ? [new EstadoItemIsnpeccion] : $modelsEstadoI
             ]);
         }
     }

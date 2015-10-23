@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descrip_novedades',
             'estado_items',
             // 'valor_potencia_volt',
+            // 'valor',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
