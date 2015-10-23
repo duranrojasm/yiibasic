@@ -245,8 +245,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   //   'firstPageLabel' => 'First Page',
                     //  'lastPageLabel' => 'Last Page',
                   'class' => '\yii\widgets\LinkPager',
-                   //    'class' => 'app\widgets\DropdownPager',
-                //other pager config if nesessary
+             
                 ],
 
 
