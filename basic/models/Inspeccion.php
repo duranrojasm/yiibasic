@@ -44,8 +44,12 @@ class Inspeccion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [['nodo_idnodo', 'estacion_idestacion', 'radio_idradio', 'multimedia_idmultimedia'], 'integer'],
             [['descripcion', 'fecha_asig', 'fecha_insp'], 'required'],
+=======
+            [['nodo_idnodo', 'estacion_idestacion', 'radio_idradio'], 'integer'],
+>>>>>>> origin/master
             [['fecha_asig', 'fecha_insp'], 'safe'],
             [['descripcion', 'ptos_referencia'], 'string', 'max' => 50],
             [['estatus'], 'string', 'max' => 20]

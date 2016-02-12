@@ -18,8 +18,8 @@ class EstructurEqSearch extends EstructurEq
     public function rules()
     {
         return [
-            [['radio_idradio', 'estructura_idestructura'], 'integer'],
-            [['fecha', 'observacion'], 'safe'],
+        
+            [['fecha', 'observacion','radio_idradio', 'estructura_idestructura'], 'safe'],
         ];
     }
 
@@ -55,13 +55,16 @@ class EstructurEqSearch extends EstructurEq
             return $dataProvider;
         }
 
+        $query->joinWith('radioIdradio')->joinWith('estructuraIdestructura');
+
         $query->andFilterWhere([
-            'radio_idradio' => $this->radio_idradio,
-            'estructura_idestructura' => $this->estructura_idestructura,
+          
             'fecha' => $this->fecha,
         ]);
 
-        $query->andFilterWhere(['like', 'observacion', $this->observacion]);
+        $query->andFilterWhere(['like', 'estructur_eq.observacion', $this->observacion])
+        ->andFilterWhere(['like', 'radio.nombre',  $this->radio_idradio])
+        ->andFilterWhere(['like', 'estructura.nombre',  $this->estructura_idestructura]);
 
         return $dataProvider;
     }

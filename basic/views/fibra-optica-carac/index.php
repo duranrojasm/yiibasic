@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'caracteristica_fo_idcaracteristica',
-            'fibra_optica_idfibra_optica',
+            'hilo_idhilo',
             'valor',
 
             ['class' => 'yii\grid\ActionColumn'],

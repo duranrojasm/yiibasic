@@ -3,13 +3,16 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
+<<<<<<< HEAD
+=======
+use app\models\HiloSearch;
+>>>>>>> origin/master
 use kartik\select2\Select2;
 use yii\widgets\Pjax;
 use yii\widgets\LinkPager;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use kartik\export\ExportMenu;
-use app\models\FibraOpticaCaracSearch;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\FibraOpticaSearch */
@@ -20,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fibra-optica-index">
 
+<<<<<<< HEAD
 
    <?php $gridColumns =[
             ['class' => 'yii\grid\SerialColumn'],
@@ -66,15 +70,24 @@ $this->params['breadcrumbs'][] = $this->title;
                
             ],
             
+=======
+  <?php $gridColumns =[
+            ['class' => 'yii\grid\SerialColumn'],
+                              
+            'codigo',
+>>>>>>> origin/master
             'nombre',
-            
-            // 'observacion',
-            // 'periodo_mantenimiento',
-             'rango1',
-             'rango2',
+            'tipo_central',
+             'telefono',
+            'direccion',
              'distancia',
+<<<<<<< HEAD
             ]; 
     ?>
+=======
+             'tiempo', 
+            ]; ?>
+>>>>>>> origin/master
 
 
 
@@ -94,63 +107,64 @@ $this->params['breadcrumbs'][] = $this->title;
         'id'=>'local',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'summary'=>'', 
          'columns' =>  [
-            ['class' => 'yii\grid\SerialColumn',
+            ['class' => 'kartik\grid\SerialColumn',
                'contentOptions' => ['style' => 'width: 30px;', 'class' => 'text-center'],
             ],
-                 [
-                'class'=>'kartik\grid\ExpandRowColumn',
-                'value'=> function($model, $key, $index, $column)
-                {
-                    return GridView::ROW_COLLAPSED;
-                },
-                'detail'=>function($model, $key, $index, $column)
-                {
-                    $searchModel = new FibraOpticaCaracSearch();
-                    $searchModel->fibra_optica_idfibra_optica = $model->idfibra_optica;
-                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+             [
+             'class'=>'kartik\grid\ExpandRowColumn',
+             'width'=>'50px',
+            'value'=>function ($model, $key, $index, $column) {
+              return GridView::ROW_COLLAPSED;
+             },
+             'detail'=>function ($model, $key, $index, $column) {
+                $searchModel = new HiloSearch();
+                $searchModel->fibra_idfibra_optica = $model->nombre;
+                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-                    return Yii::$app->controller->renderPartial('_fibracaract',[
-                       'searchModel' =>$searchModel,
-                       'dataProvider' => $dataProvider,
-                       ]); 
-                },
+               return Yii::$app->controller->renderPartial('_hilo', [
+                'searchModel'=> $searchModel,
+                'dataProvider'=>$dataProvider,
+
+                ]);
+              },
+            //'headerOptions'=>['class'=>'kartik-sheet-style'], 
+            'expandOneOnly'=>true
             ],
-
-            //'idfibra_optica',
             [
                 'attribute'=>'estacion_idestacion',
                 'value'=>'estacionIdestacion.nombre',
                
             ],
-             [
+            [
                 'attribute'=>'estacion_idestaciondos',
                 'value'=>'estacionIdestaciondos.nombre',
                
             ],
-             [
+            [
                 'attribute'=>'nodo_idnodo',
                 'value'=>'nodoIdnodo.nombre',
                
             ],
-             [
+            [
                 'attribute'=>'nodo_idnododos',
                 'value'=>'nodoIdnododos.nombre',
                
             ],
-            
+
+   
             'nombre',
             'distancia',
-            // 'observacion',
-            // 'periodo_mantenimiento',
-             'rango1',
-             'rango2',
+             'observacion',
+            'periodo_mantenimiento',
 
-             ['class' => 'yii\grid\ActionColumn',
+
+             ['class' => 'kartik\grid\ActionColumn',
               'contentOptions' => ['style' => 'width: 100px;', 'class' => 'text-center'],
                 'template' => '{view}{update}{delete}{javi_button}',
                 'buttons' => ['javi_button' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-pushpin"></span>',['create']);
+                                return Html::a('<span class="glyphicon glyphicon-pushpin"></span>',['/hilo/create']);
                         }],
                 ],
         ],
@@ -252,10 +266,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         'panel' => [
+<<<<<<< HEAD
         'heading'=>'<h3 class="panel-title">Inspecciones</h3>',
+=======
+        'heading'=>'<h3 class="panel-title">Enalces de Fibra Optica</h3>',
+>>>>>>> origin/master
         'type'=>'warning',
-             //'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Crear Localidad', ['create'], ['class' => 'btn btn-success']),
-            'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Actualizar', ['index'], ['class' => 'btn btn-warning btn-sm']),
+             'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Crear Hilos F.O', ['/hilo/create'], ['class' => 'btn btn-warning']),
+            'after'=>Html::a(' Modificar Hilos F.O', ['/hilo/index'], ['class' => 'btn btn-warning btn-sm']),
         'footer'=>true
        
         ],
@@ -269,7 +287,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= LinkPager::widget(['pagination'=>$dataProvider->pagination]);?>
 
 <?php Pjax::end();?>
-
 
    
 </div>

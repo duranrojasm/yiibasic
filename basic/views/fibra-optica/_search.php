@@ -33,10 +33,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'nodo_idnododos') ?>
 
-    <?php // echo $form->field($model, 'rango1') ?>
-
-    <?php // echo $form->field($model, 'rango2') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

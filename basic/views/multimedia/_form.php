@@ -15,9 +15,13 @@ use app\models\Inspeccion;
 
 <div class="multimedia-form">
 
+<<<<<<< HEAD
     <?php $form = ActiveForm::begin([
                 'options' => ['enctype'=>'multipart/form-data']
             ]); ?>
+=======
+    <?php $form = ActiveForm::begin('options' => ['enctype'=>'multipart/form-data']); ?>
+>>>>>>> origin/master
 
     <?= $form->field($model, 'detalle_proyecto_iddetalle_proyecto')->textInput() ?>
 
@@ -27,9 +31,13 @@ use app\models\Inspeccion;
 
     <?= $form->field($model, 'nodo_idnodo')->textInput() ?>
 
+<<<<<<< HEAD
     
 
     
+=======
+    <?= $form->field($model, 'multimedia')->textInput(['maxlength' => true]) ?>
+>>>>>>> origin/master
 
     
     <div class="form-group">

@@ -18,8 +18,8 @@ class FibraOpticaSearch extends FibraOptica
     public function rules()
     {
         return [
-            [['idfibra_optica', 'nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos', 'rango1', 'rango2'], 'integer'],
-            [['nombre', 'observacion'], 'safe'],
+            [['idfibra_optica', 'periodo_mantenimiento'], 'integer'],
+            [['nombre', 'observacion', 'nodo_idnodo', 'estacion_idestacion', 'estacion_idestaciondos', 'nodo_idnododos'], 'safe'],
             [['distancia'], 'number'],
         ];
     }
@@ -56,20 +56,25 @@ class FibraOpticaSearch extends FibraOptica
             return $dataProvider;
         }
 
+         $query->joinWith('estacionIdestacion')->joinWith(['nodoIdnodo']);
+
+
         $query->andFilterWhere([
             'idfibra_optica' => $this->idfibra_optica,
-            'nodo_idnodo' => $this->nodo_idnodo,
-            'estacion_idestacion' => $this->estacion_idestacion,
-            'distancia' => $this->distancia,
-            'periodo_mantenimiento' => $this->periodo_mantenimiento,
-            'estacion_idestaciondos' => $this->estacion_idestaciondos,
+            
+           
             'nodo_idnododos' => $this->nodo_idnododos,
-            'rango1' => $this->rango1,
-            'rango2' => $this->rango2,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'observacion', $this->observacion]);
+        $query->andFilterWhere(['like', 'fibra_optica.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'fibra_optica.observacion', $this->observacion])
+            ->andFilterWhere(['=', 'fibra_optica.distancia', $this->distancia])
+             ->andFilterWhere(['=', 'fibra_optica.periodo_mantenimiento', $this->periodo_mantenimiento])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestaciondos])
+             ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion])
+              ->andFilterWhere(['like', 'nodo.nombre', $this->nodo_idnodo]);
+           
+         
 
         return $dataProvider;
     }

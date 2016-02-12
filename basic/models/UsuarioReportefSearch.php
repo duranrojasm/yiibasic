@@ -19,6 +19,7 @@ class UsuarioReportefSearch extends UsuarioReportef
     {
         return [
             [['reporte_falla_idreporte_falla', 'usuario_idusuario'], 'integer'],
+            [['cargo'], 'safe'],
         ];
     }
 
@@ -58,6 +59,8 @@ class UsuarioReportefSearch extends UsuarioReportef
             'reporte_falla_idreporte_falla' => $this->reporte_falla_idreporte_falla,
             'usuario_idusuario' => $this->usuario_idusuario,
         ]);
+
+        $query->andFilterWhere(['like', 'cargo', $this->cargo]);
 
         return $dataProvider;
     }

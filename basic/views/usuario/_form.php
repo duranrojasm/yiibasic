@@ -76,14 +76,14 @@ $data2 =  ArrayHelper::map(Rol::find()->all(),'idrol','nombre');
     ])->label('#Carnet'); ?>
 
     <?= $form->field($model, 'telefono_cel')->widget(MaskedInput::className(), [
-    'mask' => '(9999)-999-9999',
+    'mask' => '(999)-999-9999',
     ])->label('Telf Celular'); ?>
 
      </div> 
      <div style="width:40%;float:right;padding-right:5%;top:196px;position: absolute;right:150px">
 
      <?= $form->field($model, 'telefono_hab')->widget(MaskedInput::className(), [
-    'mask' => '(9999)-999-9999',
+    'mask' => '(999)-999-9999',
     ])->label('Telf Habitación'); ?>
     
 

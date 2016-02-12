@@ -5,6 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Inspeccion;
 use app\models\InspeccionSearch;
+<<<<<<< HEAD
+=======
+use app\models\EstadoItemIsnpeccion;
+use app\models\Multimedia;
+>>>>>>> origin/master
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,8 +22,19 @@ use app\models\Nodo;
 use app\models\Estacion;
 use app\models\Radio;
 use app\models\Model;
+<<<<<<< HEAD
 use app\models\RadioCarac;
 use yii\helpers\ArrayHelper;
+=======
+use app\models\Address;
+use app\models\EntryForm;
+use yii\web\UploadedFile;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use app\models\EstadoItemIsnpeccionSearch;
+use app\models\Item;
+
+>>>>>>> origin/master
 /**
  * InspeccionController implements the CRUD actions for Inspeccion model.
  */
@@ -51,6 +67,7 @@ class InspeccionController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     public function actionIndexestacion()
     {
         $searchModel = new InspeccionSearch();
@@ -80,6 +97,20 @@ class InspeccionController extends Controller
     }
 
 
+=======
+
+    public function actionIndexnodo()
+    {
+        $searchModel = new InspeccionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexnodo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+>>>>>>> origin/master
     /**
      * Displays a single Inspeccion model.
      * @param integer $id
@@ -110,10 +141,14 @@ class InspeccionController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
+
+    
     public function actionCreate()
     {
         $model = new Inspeccion();
         $Archivo = new Multimedia();
+<<<<<<< HEAD
         $nodo = new Nodo();
         $modelsEstadoItemIns = [new EstadoItemIsnpeccion];    
 
@@ -132,6 +167,14 @@ class InspeccionController extends Controller
             //Almacenando los archivs
 
             Yii::$app->params['uploadPath'] = Yii::$app->basePath .'\web\uploads\/'.$model->nodoIdnodo->nombre.'-'.$model->idinspeccion.'/';
+=======
+        $modelsEstadoItemIns = [new EstadoItemIsnpeccion];
+
+        if ($model->load(Yii::$app->request->post())&& $model->save()) {
+            $Archivo->inspeccion_idinspeccion = $model->idinspeccion;
+            
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '\web\uploads/';
+>>>>>>> origin/master
             $Archivo->image = UploadedFile::getInstances($Archivo, 'multimedia');
             if ($Archivo->image) {
                 foreach ($Archivo->image as $file) {
@@ -143,8 +186,12 @@ class InspeccionController extends Controller
                     $ArchivoS->multimedia= $file->name;
                     $ArchivoS->save();
                 }
+<<<<<<< HEAD
             }
 
+=======
+            } 
+>>>>>>> origin/master
 
             $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname());
             Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());
@@ -252,7 +299,11 @@ class InspeccionController extends Controller
             return $this->render('estacion', [
                 'model' => $model,
                 'archivo'=>$Archivo,
+<<<<<<< HEAD
                 'modelsEstadoItemIns'=>(empty($modelsEstadoItemIns)) ? [new EstadoItemIsnpeccion] : $modelsEstadoItemIns
+=======
+                'modelsEstadoItemIns' => (empty($modelsEstadoItemIns)) ? [new EstadoItemIsnpeccion] : $modelsEstadoItemIns
+>>>>>>> origin/master
             ]);
         }
     }
@@ -346,11 +397,16 @@ class InspeccionController extends Controller
     {
         $model = $this->findModel($id);
         $modelsEstadoItemIns = $model->estadoItemIsnpeccions;
+<<<<<<< HEAD
         $Archivo = new Multimedia();
+=======
+
+>>>>>>> origin/master
 
 
          if ($model->load(Yii::$app->request->post())) {
 
+<<<<<<< HEAD
             $Archivo->inspeccion_idinspeccion = $model->idinspeccion;
             Yii::$app->params['uploadPath'] = Yii::$app->basePath .'\web\uploads\/'.$model->nodoIdnodo->nombre.'-'.$model->idinspeccion.'/';
             $Archivo->image = UploadedFile::getInstances($Archivo, 'multimedia');
@@ -366,6 +422,8 @@ class InspeccionController extends Controller
                 }
             }
 
+=======
+>>>>>>> origin/master
             $oldIDs = ArrayHelper::map($modelsEstadoItemIns, 'inspeccion_idinspeccion', 'inspeccion_idinspeccion');
             $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname(), $modelsEstadoItemIns);
             Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());

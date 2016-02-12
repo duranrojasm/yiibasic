@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Estructura;
+use app\models\EstructurEq;
+use app\models\Radio;
 use app\models\EstructuraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -98,9 +100,75 @@ class EstructuraController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
 
+        $report=EstructurEq::find()->where(['=', 'estructura_idestructura', $id])->all();
+        $c=count($report);
+        
+        $ids[]='';
+
+        foreach ($report as $value) {
+            $ids[]=$value->radio_idradio;
+        }
+
+        for ($i=1; $i < ($c+1); $i++) { 
+
+            $person=EstructurEq::findOne(['radio_idradio'=>$ids[$i]]);
+            $person->delete();
+            $personaux=Radio::findOne($ids[$i]);
+            $personaux->delete();
+
+        }
+
+        $this->findModel($id)->delete();
         return $this->redirect(['index']);
+
+    }
+
+    public function actionLists($id,$tip)
+    {
+        $countPosts = Estructura::find()
+                ->where(['estacion_idestacion' => $id,'tipo_estructura_idtipo_estructura' => $tip])
+                ->count();
+ 
+        $posts = Estructura::find()
+                ->where(['estacion_idestacion' => $id, 'tipo_estructura_idtipo_estructura' => $tip])
+                ->all();
+ 
+        if($countPosts>0){
+            echo "<option>Seleccione una estructura</option>";
+            foreach($posts as $post){
+
+                echo "<option value='".$post->idestructura."'>".$post->nombre."</option>";
+            }
+        }
+        else{
+            echo "<option>Seleccione una estructura</option>";
+        }
+ 
+    }
+
+     public function actionLista($id)
+    {
+        $countPosts = Estructura::find()
+                ->where(['estacion_idestacion' => $id])
+                ->count();
+ 
+        $posts = Estructura::find()
+                ->where(['estacion_idestacion' => $id])
+                ->all();
+ 
+        if($countPosts>0){
+            echo "<option>Seleccione una estructura</option>";
+            foreach($posts as $post){
+
+                echo "<option value='".$post->idestructura."'>".$post->nombre."</option>";
+            }
+        }
+        else{
+            echo "<option>Seleccione una estructura</option>";
+        }
+ 
     }
 
     /**

@@ -32,8 +32,17 @@
         "kartik-v/yii2-widget-switchinput": "*",
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-krajee-base": "dev-master",
+<<<<<<< HEAD
         "kartik-v/yii2-widget-fileinput": "@dev",
         "kartik-v/yii2-datecontrol": "dev-master"
+=======
+        "kartik-v/yii2-editable": "*",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "kartik-v/dependent-dropdown": "dev-master",
+        "kartik-v/yii2-datecontrol": "dev-master"
+
+>>>>>>> origin/master
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

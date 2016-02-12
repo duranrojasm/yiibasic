@@ -18,8 +18,8 @@ class EnlaceSatelitalSearch extends EnlaceSatelital
     public function rules()
     {
         return [
-            [['idenlace_satelital', 'torre_idtorre', 'cliente_idcliente', 'estacion_idestacion', 'num_antena', 'periodo_mantenimiento', 'estacion_idestaciondos'], 'integer'],
-            [['codigo', 'nombre', 'estatus', 'ubicacion_disp'], 'safe'],
+            [['idenlace_satelital', 'num_antena', 'periodo_mantenimiento'], 'integer'],
+            [['codigo', 'nombre', 'estatus', 'ubicacion_disp', 'torre_idtorre', 'cliente_idcliente', 'estacion_idestacion', 'estacion_idestaciondos'], 'safe'],
         ];
     }
 
@@ -55,20 +55,21 @@ class EnlaceSatelitalSearch extends EnlaceSatelital
             return $dataProvider;
         }
 
+        $query->joinWith('torreIdtorre')->joinWith('clienteIdcliente')->joinWith('estacionIdestacion');
+
         $query->andFilterWhere([
             'idenlace_satelital' => $this->idenlace_satelital,
-            'torre_idtorre' => $this->torre_idtorre,
-            'cliente_idcliente' => $this->cliente_idcliente,
-            'estacion_idestacion' => $this->estacion_idestacion,
-            'num_antena' => $this->num_antena,
-            'periodo_mantenimiento' => $this->periodo_mantenimiento,
-            'estacion_idestaciondos' => $this->estacion_idestaciondos,
+
         ]);
 
-        $query->andFilterWhere(['like', 'codigo', $this->codigo])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'estatus', $this->estatus])
-            ->andFilterWhere(['like', 'ubicacion_disp', $this->ubicacion_disp]);
+        $query->andFilterWhere(['like', 'enlace_satelital.codigo', $this->codigo])
+            ->andFilterWhere(['like', 'enlace_satelital.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'enlace_satelital.ubicacion_disp', $this->ubicacion_disp])
+            ->andFilterWhere(['=', 'enlace_satelital.num_antena', $this->num_antena])
+            ->andFilterWhere(['=', 'enlace_satelital.periodo_mantenimiento', $this->periodo_mantenimiento])
+            ->andFilterWhere(['like', 'torre.codigo',$this->torre_idtorre])
+            ->andFilterWhere(['like', 'cliente.nombre', $this->cliente_idcliente])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion]);
 
         return $dataProvider;
     }

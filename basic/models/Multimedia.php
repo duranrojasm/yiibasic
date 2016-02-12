@@ -24,6 +24,10 @@ class Multimedia extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     public $image;
     public static function tableName()
     {

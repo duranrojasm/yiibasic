@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Fibra Optica Carac: ' . ' ' . $model->caracteristica_fo_idcaracteristica;
 $this->params['breadcrumbs'][] = ['label' => 'Fibra Optica Caracs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->caracteristica_fo_idcaracteristica, 'url' => ['view', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'fibra_optica_idfibra_optica' => $model->fibra_optica_idfibra_optica]];
+$this->params['breadcrumbs'][] = ['label' => $model->caracteristica_fo_idcaracteristica, 'url' => ['view', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'hilo_idhilo' => $model->hilo_idhilo]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="fibra-optica-carac-update">

@@ -41,7 +41,7 @@ class LocalidadSearch extends Localidad
      */
     public function search($params)
     {
-        $query = Localidad::find();
+        $query = Localidad::find()->where(['!=','idlocalidad','1']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

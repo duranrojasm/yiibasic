@@ -15,7 +15,18 @@ use app\models\Item;
 use wbraganca\dynamicform\DynamicFormWidget;
 use app\models\Multimedia;
 use kartik\widgets\FileInput;
+<<<<<<< HEAD
 use kartik\datecontrol\DateControl;
+=======
+
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Inspeccion */
+/* @var $form yii\widgets\ActiveForm */
+>>>>>>> origin/master
+
+
+$Archivo = new Multimedia(); 
 
 
 $Archivo = new Multimedia(); 
@@ -33,7 +44,11 @@ $items = ['Bien'=> 'Bien', 'Malo'=>'Malo','No existe'=>'No existe','M2'=> 'M2',
 
 <div class="inspeccion-form">
 
+<<<<<<< HEAD
      <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data', 'data-pjax' => true ]
+=======
+     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data','data-pjax' => true]
+>>>>>>> origin/master
 ,'id'=>'dynamic-form',
             'type' => ActiveForm::TYPE_VERTICAL,
             'formConfig' => [
@@ -100,12 +115,20 @@ $items = ['Bien'=> 'Bien', 'Malo'=>'Malo','No existe'=>'No existe','M2'=> 'M2',
 ]
         ])->label('Estatus'); ?>
 
+<<<<<<< HEAD
         <?= $form->field($Archivo, 'multimedia[]')->widget(FileInput::classname(), [
+=======
+       <?= $form->field($Archivo, 'multimedia[]')->widget(FileInput::classname(), [
+>>>>>>> origin/master
                 'name' => 'attachments',
                 'options' => ['multiple' => true],
                 'pluginOptions' => ['previewFileType' => 'any','showUpload' => false]
         ])->label('Archivo');
+<<<<<<< HEAD
      ?>
+=======
+    ?>
+>>>>>>> origin/master
           
         
     

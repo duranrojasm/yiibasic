@@ -9,9 +9,12 @@ use Yii;
  *
  * @property integer $reporte_falla_idreporte_falla
  * @property integer $usuario_idusuario
+ * @property string $cargo
+ * @property integer $vehiculo
  *
  * @property ReporteFalla $reporteFallaIdreporteFalla
  * @property Usuario $usuarioIdusuario
+ * @property Vehiculo $vehiculo0
  */
 class UsuarioReportef extends \yii\db\ActiveRecord
 {
@@ -29,8 +32,9 @@ class UsuarioReportef extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['reporte_falla_idreporte_falla', 'usuario_idusuario'], 'required'],
-            [['reporte_falla_idreporte_falla', 'usuario_idusuario'], 'integer']
+            [['usuario_idusuario'], 'required'],
+            [['reporte_falla_idreporte_falla', 'usuario_idusuario', 'vehiculo'], 'integer'],
+            [['cargo'], 'string', 'max' => 30]
         ];
     }
 
@@ -41,7 +45,9 @@ class UsuarioReportef extends \yii\db\ActiveRecord
     {
         return [
             'reporte_falla_idreporte_falla' => 'Reporte Falla Idreporte Falla',
-            'usuario_idusuario' => 'Usuario Idusuario',
+            'usuario_idusuario' => 'Personal',
+            'cargo' => 'Cargo',
+            'vehiculo' => 'Vehiculo',
         ];
     }
 
@@ -59,5 +65,13 @@ class UsuarioReportef extends \yii\db\ActiveRecord
     public function getUsuarioIdusuario()
     {
         return $this->hasOne(Usuario::className(), ['idusuario' => 'usuario_idusuario']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVehiculo0()
+    {
+        return $this->hasOne(Vehiculo::className(), ['idvehiculo' => 'vehiculo']);
     }
 }

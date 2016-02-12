@@ -42,7 +42,7 @@ class Falla extends \yii\db\ActiveRecord
     {
         return [
             'idfalla' => 'Idfalla',
-            'nombre' => 'Nombre',
+            'nombre' => 'Causa',
             'tipo' => 'Tipo',
         ];
     }

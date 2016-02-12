@@ -65,7 +65,11 @@ class MultimediaController extends Controller
         $model = new Multimedia();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+<<<<<<< HEAD
            $image = UploadedFile::getInstance($model, 'multimedia');
+=======
+            $image = UploadedFile::getInstance($model, 'multimedia');
+>>>>>>> origin/master
              
              // store the source file name
             $model->multimedia = $image->name;
@@ -82,7 +86,10 @@ class MultimediaController extends Controller
                 'model' => $model,
                 ]);
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         } else {
             return $this->render('create', [
                 'model' => $model,

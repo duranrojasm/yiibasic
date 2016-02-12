@@ -68,13 +68,13 @@ class Radio extends \yii\db\ActiveRecord
             'modelo_idmodelo' => 'Modelo Idmodelo',
             'estacion_idestacion' => 'Estacion Idestacion',
             'observaciones' => 'Observaciones',
-            'posicion_fisica' => 'Posicion Fisica',
+            'posicion_fisica' => 'Posición Física',
             'nombre' => 'Nombre',
             'marca' => 'Marca',
             'serial' => 'Serial',
-            'periodo_mantenimiento' => 'Periodo Mantenimiento',
+            'periodo_mantenimiento' => 'Frecuencia',
             'estatus' => 'Estatus',
-            'ubicacion_disp' => 'Ubicacion Disp',
+            'ubicacion_disp' => 'Ubicación Disp',
             'estacion_idestaciondos' => 'Estacion Idestaciondos',
         ];
     }

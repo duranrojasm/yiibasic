@@ -8,6 +8,7 @@ use app\models\LocalidadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * LocalidadController implements the CRUD actions for Localidad model.
@@ -100,6 +101,51 @@ class LocalidadController extends Controller
         }
     }
 
+   public function actionLists($id)
+    {
+        $countPosts = Localidad::find()
+                ->where(['tipo' => 'Region'])
+                ->count();
+ 
+        $posts = Localidad::find()
+                ->where(['tipo' => 'Region'])
+                ->all();
+ 
+        if($countPosts>0){
+            echo "<option>Seleccione ubicación</option>";
+            foreach($posts as $post){
+
+                echo "<option value='".$post->tipo."'>".$post->nombre."</option>";
+            }
+        }
+        else{
+            echo "<option>Seleccione ubicación</option>";
+        }
+ 
+    }
+
+   public function actionListsone($id)
+    {
+        $countPosts = Localidad::find()
+                ->where(['tipo' => 'Estado'])
+                ->count();
+ 
+        $posts = Localidad::find()
+                ->where(['tipo' => 'Estado'])
+                ->all();
+ 
+        if($countPosts>0){
+            echo "<option>Seleccione ubicación</option>";
+            foreach($posts as $post){
+
+                echo "<option value='".$post->tipo."'>".$post->nombre."</option>";
+            }
+        }
+        else{
+            echo "<option>Seleccione ubicación</option>";
+        }
+ 
+    }
     /**
      * Deletes an existing Localidad model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

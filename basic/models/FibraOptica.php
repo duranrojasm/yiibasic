@@ -16,16 +16,13 @@ use Yii;
  * @property integer $periodo_mantenimiento
  * @property integer $estacion_idestaciondos
  * @property integer $nodo_idnododos
- * @property integer $rango1
- * @property integer $rango2
  *
  * @property EstacionFo[] $estacionFos
  * @property Estacion $estacionIdestacion
  * @property Estacion $estacionIdestaciondos
  * @property Nodo $nodoIdnodo
  * @property Nodo $nodoIdnododos
- * @property FibraOpticaCarac[] $fibraOpticaCaracs
- * @property CaracteristicaFo[] $caracteristicaFoIdcaracteristicas
+ * @property Hilo[] $hilos
  * @property ManteCorrectivo[] $manteCorrectivos
  * @property MantenimientoPreventivo[] $mantenimientoPreventivos
  */
@@ -45,7 +42,7 @@ class FibraOptica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos', 'rango1', 'rango2'], 'integer'],
+            [['nodo_idnodo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos', 'nodo_idnododos'], 'integer'],
             [['nombre'], 'required'],
             [['distancia'], 'number'],
             [['nombre'], 'string', 'max' => 20],
@@ -65,11 +62,9 @@ class FibraOptica extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'distancia' => 'Distancia',
             'observacion' => 'Observación',
-            'periodo_mantenimiento' => 'Periodo Mant.',
+            'periodo_mantenimiento' => 'Pdo de Mantenimiento',
             'estacion_idestaciondos' => 'Estacion Dest',
             'nodo_idnododos' => 'Nodo Dest',
-            'rango1' => 'Num de Fibra Inicio',
-            'rango2' => 'Num de Fibra Fin',
         ];
     }
 
@@ -116,17 +111,9 @@ class FibraOptica extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFibraOpticaCaracs()
+    public function getHilos()
     {
-        return $this->hasMany(FibraOpticaCarac::className(), ['fibra_optica_idfibra_optica' => 'idfibra_optica']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCaracteristicaFoIdcaracteristicas()
-    {
-        return $this->hasMany(CaracteristicaFo::className(), ['idcaracteristica_fo' => 'caracteristica_fo_idcaracteristica'])->viaTable('fibra_optica_carac', ['fibra_optica_idfibra_optica' => 'idfibra_optica']);
+        return $this->hasMany(Hilo::className(), ['fibra_idfibra_optica' => 'idfibra_optica']);
     }
 
     /**

@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'caracteristica_fo_idcaracteristica')->textInput() ?>
 
-    <?= $form->field($model, 'fibra_optica_idfibra_optica')->textInput() ?>
+    <?= $form->field($model, 'hilo_idhilo')->textInput() ?>
 
     <?= $form->field($model, 'valor')->textInput(['maxlength' => true]) ?>
 

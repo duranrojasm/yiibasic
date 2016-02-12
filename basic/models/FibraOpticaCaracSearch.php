@@ -18,7 +18,7 @@ class FibraOpticaCaracSearch extends FibraOpticaCarac
     public function rules()
     {
         return [
-            [['caracteristica_fo_idcaracteristica', 'fibra_optica_idfibra_optica'], 'integer'],
+            [['caracteristica_fo_idcaracteristica', 'hilo_idhilo'], 'integer'],
             [['valor'], 'safe'],
         ];
     }
@@ -57,7 +57,7 @@ class FibraOpticaCaracSearch extends FibraOpticaCarac
 
         $query->andFilterWhere([
             'caracteristica_fo_idcaracteristica' => $this->caracteristica_fo_idcaracteristica,
-            'fibra_optica_idfibra_optica' => $this->fibra_optica_idfibra_optica,
+            'hilo_idhilo' => $this->hilo_idhilo,
         ]);
 
         $query->andFilterWhere(['like', 'valor', $this->valor]);

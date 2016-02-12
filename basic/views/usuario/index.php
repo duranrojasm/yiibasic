@@ -18,6 +18,8 @@ use kartik\export\ExportMenu;
 $this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="usuario-index">
 
  <?php $gridColumns =[
@@ -230,6 +232,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php Pjax::end();?>
 
-   
+
 
 </div>
+

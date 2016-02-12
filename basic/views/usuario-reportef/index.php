@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'reporte_falla_idreporte_falla',
             'usuario_idusuario',
+            'cargo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

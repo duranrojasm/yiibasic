@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
          'columns' =>  [
-            ['class' => 'yii\grid\SerialColumn',
+            ['class' => 'kartik\grid\SerialColumn',
                'contentOptions' => ['style' => 'width: 30px;', 'class' => 'text-center'],
             ],
             [
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tipo',
 
 
-             ['class' => 'yii\grid\ActionColumn',
+             ['class' => 'kartik\grid\ActionColumn',
               'contentOptions' => ['style' => 'width: 100px;', 'class' => 'text-center'],
                 'template' => '{view}{update}{delete}{javi_button}',
                 'buttons' => ['javi_button' => function ($url, $model) {

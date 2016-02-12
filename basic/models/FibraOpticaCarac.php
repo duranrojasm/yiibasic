@@ -8,11 +8,11 @@ use Yii;
  * This is the model class for table "fibra_optica_carac".
  *
  * @property integer $caracteristica_fo_idcaracteristica
- * @property integer $fibra_optica_idfibra_optica
+ * @property integer $hilo_idhilo
  * @property string $valor
  *
  * @property CaracteristicaFo $caracteristicaFoIdcaracteristica
- * @property FibraOptica $fibraOpticaIdfibraOptica
+ * @property Hilo $hiloIdhilo
  */
 class FibraOpticaCarac extends \yii\db\ActiveRecord
 {
@@ -30,8 +30,8 @@ class FibraOpticaCarac extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['caracteristica_fo_idcaracteristica', 'valor'], 'required'],
-            [['caracteristica_fo_idcaracteristica', 'fibra_optica_idfibra_optica'], 'integer'],
+            [['caracteristica_fo_idcaracteristica', 'hilo_idhilo', 'valor'], 'required'],
+            [['caracteristica_fo_idcaracteristica', 'hilo_idhilo'], 'integer'],
             [['valor'], 'string', 'max' => 30]
         ];
     }
@@ -42,8 +42,8 @@ class FibraOpticaCarac extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'caracteristica_fo_idcaracteristica' => 'Datos',
-            'fibra_optica_idfibra_optica' => 'Fibra Optica Idfibra Optica',
+            'caracteristica_fo_idcaracteristica' => 'Caracteristica Fo Idcaracteristica',
+            'hilo_idhilo' => 'Hilo Idhilo',
             'valor' => 'Valor',
         ];
     }
@@ -59,8 +59,8 @@ class FibraOpticaCarac extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFibraOpticaIdfibraOptica()
+    public function getHiloIdhilo()
     {
-        return $this->hasOne(FibraOptica::className(), ['idfibra_optica' => 'fibra_optica_idfibra_optica']);
+        return $this->hasOne(Hilo::className(), ['idhilo' => 'hilo_idhilo']);
     }
 }

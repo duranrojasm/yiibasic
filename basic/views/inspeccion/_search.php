@@ -25,7 +25,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ptos_referencia') ?>
 
+<<<<<<< HEAD
     <?php echo $form->field($model, 'fecha_asig') ?>
+=======
+    <?php  echo $form->field($model, 'fecha_asig') ?>
+>>>>>>> origin/master
 
     <?php  echo $form->field($model, 'fecha_insp') ?>
 

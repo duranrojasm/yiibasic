@@ -18,8 +18,8 @@ class EstructuraSearch extends Estructura
     public function rules()
     {
         return [
-            [['idestructura', 'estacion_idestacion', 'tipo_estructura_idtipo_estructura', 'estructura_idestructura', 'cantidad'], 'integer'],
-            [['codigo', 'nombre', 'observacion'], 'safe'],
+            [['idestructura', 'cantidad'], 'integer'],
+            [['codigo', 'nombre', 'observacion', 'estacion_idestacion', 'tipo_estructura_idtipo_estructura', 'estructura_idestructura'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class EstructuraSearch extends Estructura
      */
     public function search($params)
     {
-        $query = Estructura::find();
+        $query = Estructura::find()->where(['!=','idestructura','1']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,17 +55,20 @@ class EstructuraSearch extends Estructura
             return $dataProvider;
         }
 
+        $query->joinWith('estacionIdestacion')->joinWith('tipoEstructuraIdtipoEstructura');
+
         $query->andFilterWhere([
             'idestructura' => $this->idestructura,
-            'estacion_idestacion' => $this->estacion_idestacion,
-            'tipo_estructura_idtipo_estructura' => $this->tipo_estructura_idtipo_estructura,
-            'estructura_idestructura' => $this->estructura_idestructura,
-            'cantidad' => $this->cantidad,
+            
         ]);
 
-        $query->andFilterWhere(['like', 'codigo', $this->codigo])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'observacion', $this->observacion]);
+        $query->andFilterWhere(['like', 'estructura.codigo', $this->codigo])
+            ->andFilterWhere(['like', 'estructura.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'estructura.observacion', $this->observacion])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion])
+            ->andFilterWhere(['like', 'tipo_estructura.nombre', $this->tipo_estructura_idtipo_estructura])
+            ->andFilterWhere(['like', 'estructura.nombre',$this->estructura_idestructura])
+            ->andFilterWhere(['like', 'estructura.cantidad', $this->cantidad]);
 
         return $dataProvider;
     }

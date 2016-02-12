@@ -18,8 +18,8 @@ class EstacionSearch extends Estacion
     public function rules()
     {
         return [
-            [['idestacion', 'localidad_idlocalidad', 'distancia'], 'integer'],
-            [['codigo', 'nombre', 'tipo_central', 'telefono', 'direccion'], 'safe'],
+            [['idestacion', 'distancia'], 'integer'],
+            [['codigo', 'nombre', 'tipo_central', 'telefono', 'direccion', 'localidad_idlocalidad'], 'safe'],
             [['tiempo'], 'number'],
         ];
     }
@@ -42,7 +42,7 @@ class EstacionSearch extends Estacion
      */
     public function search($params)
     {
-        $query = Estacion::find();
+        $query = Estacion::find()->where(['!=','idestacion','1']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,18 +57,23 @@ class EstacionSearch extends Estacion
             return $dataProvider;
         }
 
+         $query->joinWith('localidadIdlocalidad');
+
         $query->andFilterWhere([
             'idestacion' => $this->idestacion,
-            'localidad_idlocalidad' => $this->localidad_idlocalidad,
-            'distancia' => $this->distancia,
-            'tiempo' => $this->tiempo,
+           
+          
+          
         ]);
 
-        $query->andFilterWhere(['like', 'codigo', $this->codigo])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'tipo_central', $this->tipo_central])
-            ->andFilterWhere(['like', 'telefono', $this->telefono])
-            ->andFilterWhere(['like', 'direccion', $this->direccion]);
+        $query->andFilterWhere(['like', 'estacion.codigo', $this->codigo])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'estacion.tipo_central', $this->tipo_central])
+             ->andFilterWhere(['=', 'estacion.distancia', $this->distancia])
+            ->andFilterWhere(['=', 'estacion.tiempo',  $this->tiempo])
+            ->andFilterWhere(['like', 'estacion.telefono', $this->telefono])
+            ->andFilterWhere(['like', 'estacion.direccion', $this->direccion])
+            ->andFilterWhere(['like', 'localidad.nombre', $this->localidad_idlocalidad]);
 
         return $dataProvider;
     }
