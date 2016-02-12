@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 //use yii\grid\GridView;
@@ -11,14 +10,145 @@ use yii\widgets\LinkPager;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use kartik\export\ExportMenu;
+use app\models\Coordenada;
+use app\models\Estacion;
+use yii\db\Query;
+$connection = \Yii::$app->db;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\CoordenadaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/*
 
+
+
+
+*/
+$data1 =  ArrayHelper::map(Coordenada::find()->all(),'idcoordenada','latitud');
+$data2 =  ArrayHelper::map(Coordenada::find()->all(),'idcoordenada','longitud');
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="estilo.css">
+
+  <div id="capa-mapa" style="width:400px;height:400px"></div>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true">
+    </script>
+    
+
+  <script type="text/javascript">
+    // creamos un array con la información de todos los puntos:
+    // su nombre, latitud, longitud,
+    // el icono que le queramos asignar (ver más adelante)
+    // y un html totalmente personalizable a vuestro gusto, incluyendo imágenes y enlaces
+    
+    
+   
+
+
+    function inicializaGoogleMaps() {
+        // Coordenadas del centro de nuestro recuadro principal
+        var x =41.389624;
+        var y = 2.15988563537;
+        var mapOptions = {
+            zoom: 13,
+            center: new google.maps.LatLng(x, y),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("capa-mapa"), mapOptions);
+        setGoogleMarkers(map);
+    }
+    var markers = Array();
+    var icon1 = Array();
+    var infowindowActivo = false;
+    function setGoogleMarkers(map) {
+         var arrayLat = <?php echo json_encode($data1); ?>;
+         var arrayLon = <?php echo json_encode($data2); ?>;
+        // Definimos los iconos a utilizar con sus medidas
+        
+        var icon1 = new google.maps.MarkerImage(
+            "http://www.vinx.info/uploads/editor/map-green.png",
+            new google.maps.Size(20, 30)
+        );
+ 
+        var i;
+         
+        
+        for(i in arrayLat) {
+              var myLatLng = new google.maps.LatLng(arrayLat[i], arrayLon[i]);
+            markers=new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                icon: icon1
+            });
+            markers.infoWindow=new google.maps.InfoWindow({
+                content: "<div>+arrayDescripcion+</div>"
+            });
+            google.maps.event.addListener(markers, 'click', function(){      
+                if(infowindowActivo)
+                    infowindowActivo.close();
+                infowindowActivo = this.infoWindow;
+                infowindowActivo.open(map, this);
+            });
+         
+        }
+    }
+    inicializaGoogleMaps();
+
+  </script>
+  
+
+
+</head>
+<body>
+  <header>
+    <h1></h1>
+  </header>
+  <section>
+    <article id="capa-mapa">
+      
+    </article>
+  </section>
+  <footer></footer>
+</body>
+</html>
+
+
+
+<?php 
 $this->title = 'Coordenadas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+$clientes[]=array("nombre"=>"Norma", "edad" =>"25");
+$clientes[]=array("nombre"=>"Martha", "edad" =>"18");
+$clientes[]=array("nombre"=>"Juan", "edad" =>"23");
+$clientes[]=array("nombre"=>"Mateo", "edad" =>"22");
+$clientes[]=array("nombre"=>"Marcos", "edad" =>"26");
+
+
+$objJson=json_encode($clientes);
+
+
+    ?>
+
+
+    <script type="text/javascript">
+      var json=eval(<?php echo $objJson; ?>);
+      
+   
+    for (var i = 0; i >= json.length; i++) {
+       document.write("Nombre: "+json[i].nombre +" - Edad: "+json[i].edad+"<br/>"); 
+    };
+      
+    </script>
+
 <div class="coordenada-index">
 
    <?php $gridColumns =[
@@ -227,8 +357,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= LinkPager::widget(['pagination'=>$dataProvider->pagination]);?>
 
-<?php Pjax::end();?>
+<?php Pjax::end();
+
+
+
+
+?>
 
 
 
 </div>
+
+

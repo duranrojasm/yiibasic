@@ -16,13 +16,17 @@ use Yii;
  * @property string $fecha_insp
  * @property string $estatus
  * @property integer $radio_idradio
+ * @property integer $multimedia_idmultimedia
  *
  * @property EstadoItemIsnpeccion[] $estadoItemIsnpeccions
  * @property Item[] $itemIditems
  * @property Estacion $estacionIdestacion
+ * @property Multimedia $multimediaIdmultimedia
  * @property Nodo $nodoIdnodo
  * @property Radio $radioIdradio
  * @property Multimedia[] $multimedia
+ * @property UsuarioInspeccion[] $usuarioInspeccions
+ * @property Usuario[] $usuarioIdusuarios
  */
 class Inspeccion extends \yii\db\ActiveRecord
 {
@@ -40,7 +44,7 @@ class Inspeccion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nodo_idnodo', 'estacion_idestacion', 'radio_idradio'], 'integer'],
+            [['nodo_idnodo', 'estacion_idestacion', 'radio_idradio', 'multimedia_idmultimedia'], 'integer'],
             [['descripcion', 'fecha_asig', 'fecha_insp'], 'required'],
             [['fecha_asig', 'fecha_insp'], 'safe'],
             [['descripcion', 'ptos_referencia'], 'string', 'max' => 50],
@@ -63,6 +67,7 @@ class Inspeccion extends \yii\db\ActiveRecord
             'fecha_insp' => 'Fecha Insp',
             'estatus' => 'Estatus',
             'radio_idradio' => 'Radio Idradio',
+            'multimedia_idmultimedia' => 'Multimedia Idmultimedia',
         ];
     }
 
@@ -93,6 +98,14 @@ class Inspeccion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getMultimediaIdmultimedia()
+    {
+        return $this->hasOne(Multimedia::className(), ['idmultimedia' => 'multimedia_idmultimedia']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getNodoIdnodo()
     {
         return $this->hasOne(Nodo::className(), ['idnodo' => 'nodo_idnodo']);
@@ -112,5 +125,21 @@ class Inspeccion extends \yii\db\ActiveRecord
     public function getMultimedia()
     {
         return $this->hasMany(Multimedia::className(), ['inspeccion_idinspeccion' => 'idinspeccion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarioInspeccions()
+    {
+        return $this->hasMany(UsuarioInspeccion::className(), ['inspeccion_idinspeccion' => 'idinspeccion']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarioIdusuarios()
+    {
+        return $this->hasMany(Usuario::className(), ['idusuario' => 'usuario_idusuario'])->viaTable('usuario_inspeccion', ['inspeccion_idinspeccion' => 'idinspeccion']);
     }
 }

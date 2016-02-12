@@ -1,0 +1,11 @@
+2015-10-22 14:36:30 ERROR  : Error connecting to the server: FATAL:  la autentificación password falló para el usuario «postgres»
+
+2015-11-14 20:46:51 ERROR  : Error connecting to the server: FATAL:  la autentificación password falló para el usuario «postgres»
+
+2015-11-14 20:53:04 ERROR  : ERROR:  inserción o actualización en la tabla «inspeccion» viola la llave foránea «inspeccion_estacion_idestacion_fkey»
+DETAIL:  La llave (estacion_idestacion)=(1) no está presente en la tabla «estacion».
+2015-11-14 20:53:17 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 4:     VALUES (1, 1, , '', 
+                          ^
+2015-11-14 20:53:28 ERROR  : ERROR:  inserción o actualización en la tabla «inspeccion» viola la llave foránea «inspeccion_radio_idradio_fkey2»
+DETAIL:  La llave (radio_idradio)=(1) no está presente en la tabla «radio».

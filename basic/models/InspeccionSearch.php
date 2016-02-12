@@ -39,9 +39,23 @@ class InspeccionSearch extends Inspeccion
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $n)
     {
-        $query = Inspeccion::find();
+        if($n==1)
+        {
+
+           $query = Inspeccion::find()->where(['>','estacion_idestacion', '1']);
+
+        }elseif ($n==2)
+        {
+           $query = Inspeccion::find()->where(['>','radio_idradio', '1']);
+               
+        }elseif ($n==3)
+        {
+             $query = Inspeccion::find()->where(['>','nodo_idnodo', '1']);; 
+        }
+
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

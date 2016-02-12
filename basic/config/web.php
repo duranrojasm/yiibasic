@@ -31,12 +31,15 @@ $config = [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@app/views' => ['@webroot/themes/thm1'],
-                    //'@app/views' => ['@webroot/themes/thm2'],
-                    'baseUrl'=>'@web'
-                ]
+                    '@app/views' => ['@webroot/themes/thm1']
+                ],
+                'baseUrl' => '@web/themes/thm1',
             ]
+
         ],
+
+    
+
 
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

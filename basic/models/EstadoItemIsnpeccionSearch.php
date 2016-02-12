@@ -63,9 +63,13 @@ class EstadoItemIsnpeccionSearch extends EstadoItemIsnpeccion
             'valor_potencia_volt' => $this->valor_potencia_volt,
         ]);
 
-        $query->andFilterWhere(['like', 'descrip_novedades', $this->descrip_novedades])
-            ->andFilterWhere(['like', 'estado_items', $this->estado_items])
-            ->andFilterWhere(['like', 'valor', $this->valor]);
+        $query->andFilterWhere([
+            'like', 'descrip_novedades', $this->descrip_novedades,
+            'like', 'estado_items', $this->estado_items,
+        ]);
+            
+
+        $query->andFilterWhere(['like', 'valor', $this->valor]);
 
         return $dataProvider;
     }

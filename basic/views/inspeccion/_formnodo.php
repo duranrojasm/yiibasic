@@ -13,10 +13,18 @@ use yii\helpers\ArrayHelper;
 use app\models\Nodo;
 use app\models\Item;
 use wbraganca\dynamicform\DynamicFormWidget;
+use app\models\Multimedia;
+use kartik\widgets\FileInput;
+use kartik\datecontrol\DateControl;
 
+
+$Archivo = new Multimedia(); 
 
 
 $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
+$items = ['Bien'=> 'Bien', 'Malo'=>'Malo','No existe'=>'No existe','M2'=> 'M2',
+];
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inspeccion */
@@ -25,9 +33,9 @@ $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
 
 <div class="inspeccion-form">
 
-     <?php $form = ActiveForm::begin(['id'=>'dynamic-form',
+     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data', 'data-pjax' => true ]
+,'id'=>'dynamic-form',
             'type' => ActiveForm::TYPE_VERTICAL,
-            'options' => ['data-pjax' => true ],
             'formConfig' => [
                 'labelSpan' => 3, 
                 'deviceSize' => ActiveForm::SIZE_SMALL,
@@ -37,7 +45,8 @@ $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                 ]
             //'fullSpan'=>12
 
-    ]); ?>
+    ]
+); ?>
 
 
 <div class="row">
@@ -61,26 +70,44 @@ $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
 
         <?= $form->field($model, 'ptos_referencia')->textInput(['maxlength' => true])->label('Pto de Referencia'); ?>
 
-        <?= $form->field($model, 'fecha_asig')->widget(DatePicker::classname(), [
+        
+        <!--<?= $form->field($model, 'fecha_asig')->widget(DatePicker::classname(), [
             'language' => 'es',    
             'options' => ['placeholder' => 'Fecha de Asignación...'],
             'pluginOptions' => [
-                'format' => 'dd-M-yyyy',
+                'format' => 'dd-mm-yyyy',
                 'autoclose'=>true
             ]
-        ])->label('Fecha de Asignación'); ?>
+        ])->label('Fecha de Asignación'); ?>-->
 
-
-        <?= $form->field($model, 'fecha_insp')->widget(DatePicker::classname(), [
+    <?= $form->field($model, 'fecha_insp')->textInput()->widget(DatePicker::classname(), [
             'language' => 'es',    
             'options' => ['placeholder' => 'Fecha de Asignación...'],
             'pluginOptions' => [
-                'format' => 'dd-M-yyyy',
+                'format' => 'dd-mm-yyyy',
                 'autoclose'=>true
             ]
         ])->label('Fecha de Inspección'); ?>
+    
+        
+        <?= $form->field($model, 'estatus')->widget(SwitchInput::classname(), [
+            'pluginOptions'=>[
+            'handleWidth'=>90,
+            'onText'=>'Realizada',
+            'offText'=>'No Realizada ',
+            'onColor' => 'success',
+            'offColor' => 'danger',
+]
+        ])->label('Estatus'); ?>
 
-        <?= $form->field($model, 'estatus')->textInput(['maxlength' => true])->label('Estatus'); ?>
+        <?= $form->field($Archivo, 'multimedia[]')->widget(FileInput::classname(), [
+                'name' => 'attachments',
+                'options' => ['multiple' => true],
+                'pluginOptions' => ['previewFileType' => 'any','showUpload' => false]
+        ])->label('Archivo');
+     ?>
+          
+        
     
 
     </div>
@@ -92,7 +119,7 @@ $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
  <div class="row">
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Caractericas del nodo</h4></div>
+        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Descripción del nodo</h4></div>
         <div class="panel-body">
 
              <?php DynamicFormWidget::begin([
@@ -127,16 +154,16 @@ $data =  ArrayHelper::map(Nodo::find()->all(),'idnodo','nombre');
                         <?php
                             // necessary for update action.
                             if (! $modelsEstadoItemIns->isNewRecord) {
-                                echo Html::activeHiddenInput($modelsEstadoItemIns, "[{$i}]id");
+                                echo Html::activeHiddenInput($modelsEstadoItemIns, "[{$i}]inspeccion_idinspeccion");
                             }
                         ?>
                     
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelsEstadoItemIns, "[{$i}]item_iditem")->dropDownList( ArrayHelper::map(Item::find()->where(['=', 'tipo', 'Nodo'])->all(),'iditem','nombre')) ?>
+                                <?= $form->field($modelsEstadoItemIns, "[{$i}]item_iditem")->dropDownList( ArrayHelper::map(Item::find()->where(['=', 'tipo', 'Nodo'])->all(),'iditem','nombre'))->label('Item'); ?>
                             </div>
                             <div class="col-sm-6">
-                                <?= $form->field($modelsEstadoItemIns, "[{$i}]valor")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelsEstadoItemIns, "[{$i}]valor")->dropDownList($items,['prompt'=>'Seleccione','id'=>'user_dropdown'])->label('Valor'); ?>
                             </div>
                         </div><!-- .row -->
                        

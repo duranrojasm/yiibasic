@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Multimedia;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inspeccion */
@@ -9,6 +11,8 @@ use yii\widgets\DetailView;
 $this->title = $model->idinspeccion;
 $this->params['breadcrumbs'][] = ['label' => 'Inspeccions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$Archivo = new Multimedia();
 ?>
 <div class="inspeccion-view">
 
@@ -37,7 +41,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_insp',
             'estatus',
             'radio_idradio',
-        ],
+            
+        ]
     ]) ?>
+
+  <?php
+  
+  $a =  ArrayHelper::map(Multimedia::find()->where(['=', 'inspeccion_idinspeccion', $model->idinspeccion])->all(),'idmultimedia','multimedia');
+  
+
+
+  foreach ($a as  $value) {
+     //print_r($value);
+     print_r( "<center><a href='uploads/".$model->nodoIdnodo->nombre.'-'.$model->idinspeccion.'/'.$value."'><img style=\"width:30%\" src='uploads/".$model->nodoIdnodo->nombre.'-'.$model->idinspeccion.'/'.$value."' class=\"img-responsive\"></a></center>");
+
+
+  }
+     
+   ?>   
 
 </div>

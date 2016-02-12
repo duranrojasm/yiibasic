@@ -21,6 +21,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'valor') ?>
 
+    <?= $form->field($model, 'valorrau') ?>
+
+    <?= $form->field($model, 'inspeccion_idinspeccion') ?>
+
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

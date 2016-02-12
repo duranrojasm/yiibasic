@@ -33,8 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'inspeccion_idinspeccion',
             'estacion_idestacion',
             'nodo_idnodo',
-            'multimedia:datetime',
+            'multimedia',
         ],
     ]) ?>
+
+    <?php
+    echo "<center><a href='uploads/".$model->nodoIdnodo->multimedia."'><img style=\"width:30%\" src='uploads/".$model->nodoIdnodo->multimedia."' class=\"img-responsive\"></a></center>";
+   ?>
 
 </div>

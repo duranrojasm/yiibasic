@@ -24,16 +24,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            //IMAGEN DEL DOCUMENTO / IMAGEN
+            [
+              'attribute' => 'multimedia',
+              'format' => 'html',
+              'label' => 'ImageColumnLable',
+              'value' => function ($data) {
+                return Html::img('uploads/' . $data['multimedia'],
+                ['width' => '100px']);
+              },
+            ],
+ 
+            //NOMBRE + URL DEL DOCUMENTO / IMAGEN
+            [
+              'label'=>'File',
+              'format' => 'raw',
+              'value'=>function ($data) {
+                  $url="uploads/".$data->multimedia;
+                  return Html::a($data->multimedia, $url);
+              },
+            ],
             'idmultimedia:datetime',
             'detalle_proyecto_iddetalle_proyecto',
             'inspeccion_idinspeccion',
             'estacion_idestacion',
             'nodo_idnodo',
-            // 'multimedia:datetime',
+            // 'multimedia',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 
 </div>

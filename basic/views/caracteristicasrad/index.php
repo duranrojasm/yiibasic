@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'idcaracteristicasrad',
             'nombre',
             'tipo',
+            'rau',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

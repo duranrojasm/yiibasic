@@ -19,7 +19,7 @@ class CaracteristicasradSearch extends Caracteristicasrad
     {
         return [
             [['idcaracteristicasrad'], 'integer'],
-            [['nombre', 'tipo'], 'safe'],
+            [['nombre', 'tipo', 'rau'], 'safe'],
         ];
     }
 
@@ -60,7 +60,8 @@ class CaracteristicasradSearch extends Caracteristicasrad
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'tipo', $this->tipo]);
+            ->andFilterWhere(['like', 'tipo', $this->tipo])
+            ->andFilterWhere(['like', 'rau', $this->rau]);
 
         return $dataProvider;
     }

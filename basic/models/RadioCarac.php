@@ -10,8 +10,11 @@ use Yii;
  * @property integer $caracteristicasrad_idcaracteristicas
  * @property integer $radio_idradio
  * @property string $valor
+ * @property string $valorrau
+ * @property integer $inspeccion_idinspeccion
  *
  * @property Caracteristicasrad $caracteristicasradIdcaracteristicas
+ * @property Inspeccion $inspeccionIdinspeccion
  * @property Radio $radioIdradio
  */
 class RadioCarac extends \yii\db\ActiveRecord
@@ -31,8 +34,8 @@ class RadioCarac extends \yii\db\ActiveRecord
     {
         return [
             [['caracteristicasrad_idcaracteristicas', 'radio_idradio', 'valor'], 'required'],
-            [['caracteristicasrad_idcaracteristicas', 'radio_idradio'], 'integer'],
-            [['valor'], 'string', 'max' => 30]
+            [['caracteristicasrad_idcaracteristicas', 'radio_idradio', 'inspeccion_idinspeccion'], 'integer'],
+            [['valor', 'valorrau'], 'string', 'max' => 30]
         ];
     }
 
@@ -45,6 +48,8 @@ class RadioCarac extends \yii\db\ActiveRecord
             'caracteristicasrad_idcaracteristicas' => 'Caracteristicasrad Idcaracteristicas',
             'radio_idradio' => 'Radio Idradio',
             'valor' => 'Valor',
+            'valorrau' => 'Valorrau',
+            'inspeccion_idinspeccion' => 'Inspeccion Idinspeccion',
         ];
     }
 
@@ -54,6 +59,14 @@ class RadioCarac extends \yii\db\ActiveRecord
     public function getCaracteristicasradIdcaracteristicas()
     {
         return $this->hasOne(Caracteristicasrad::className(), ['idcaracteristicasrad' => 'caracteristicasrad_idcaracteristicas']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInspeccionIdinspeccion()
+    {
+        return $this->hasOne(Inspeccion::className(), ['idinspeccion' => 'inspeccion_idinspeccion']);
     }
 
     /**

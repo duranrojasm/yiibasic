@@ -25,13 +25,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ptos_referencia') ?>
 
-    <?php // echo $form->field($model, 'fecha_asig') ?>
+    <?php echo $form->field($model, 'fecha_asig') ?>
 
-    <?php // echo $form->field($model, 'fecha_insp') ?>
+    <?php  echo $form->field($model, 'fecha_insp') ?>
 
-    <?php // echo $form->field($model, 'estatus') ?>
+    <?php  echo $form->field($model, 'estatus') ?>
 
-    <?php // echo $form->field($model, 'radio_idradio') ?>
+    <?php  echo $form->field($model, 'radio_idradio') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

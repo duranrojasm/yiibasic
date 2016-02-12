@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'caracteristicasrad_idcaracteristicas',
             'radio_idradio',
             'valor',
+            'valorrau',
+            'inspeccion_idinspeccion',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_formnodo', [
         'model' => $model,
-        'modelsEstadoItemIns' => $modelsEstadoItemIns,
+        'modelsEstadoItemIns'=> $modelsEstadoItemIns,
     ]) ?>
 
 </div>

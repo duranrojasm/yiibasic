@@ -2,9 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
-//use app\models\Localidad;
 use kartik\select2\Select2;
 use yii\widgets\Pjax;
 use yii\widgets\LinkPager;
@@ -22,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fibra-optica-index">
 
+
    <?php $gridColumns =[
             ['class' => 'yii\grid\SerialColumn'],
                               
@@ -35,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 {
                     $searchModel = new FibraOpticaCaracSearch();
                     $searchModel->fibra_optica_idfibra_optica = $model->idfibra_optica;
+
                     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
                     return Yii::$app->controller->renderPartial('_fibracaract',[
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            //'idfibra_optica',
+            
             [
                 'attribute'=>'estacion_idestacion',
                 'value'=>'estacionIdestacion.nombre',
@@ -73,7 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
              'rango1',
              'rango2',
              'distancia',
-            ]; ?>
+            ]; 
+    ?>
 
 
 
@@ -251,7 +252,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         'panel' => [
-        'heading'=>'<h3 class="panel-title">Enlaces de Fibra Optica</h3>',
+        'heading'=>'<h3 class="panel-title">Inspecciones</h3>',
         'type'=>'warning',
              //'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Crear Localidad', ['create'], ['class' => 'btn btn-success']),
             'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Actualizar', ['index'], ['class' => 'btn btn-warning btn-sm']),
