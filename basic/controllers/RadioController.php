@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Radio;
+use app\models\EstructurEq;
 use app\models\RadioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Estructura;
 
 /**
  * RadioController implements the CRUD actions for Radio model.
@@ -61,12 +63,19 @@ class RadioController extends Controller
     public function actionCreate()
     {
         $model = new Radio();
+        $estruc = new EstructurEq();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) &&  $estruc->load(Yii::$app->request->post())) {
+
+            $model->save(false);
+            $estruc->radio_idradio = $model->idradio;
+            $estruc->save();
+
             return $this->redirect(['view', 'id' => $model->idradio]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'estruc' => $estruc,
             ]);
         }
     }
@@ -79,15 +88,30 @@ class RadioController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Radio::findOne($id);
+        $estruc = EstructurEq::findOne($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idradio]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if (!isset($model, $estruc)) {
+            throw new NotFoundHttpException("No se localiza los datos, alguno de ellos fue eliminado");
         }
+
+        
+
+        if ($model->load(Yii::$app->request->post()) && $estruc->load(Yii::$app->request->post())) {
+          
+            
+                $model->save(false);
+                $estruc->save(false);
+                return $this->redirect(['view', 'id' => $id]);
+            }
+        
+
+        return $this->render('update', [
+            'model' => $model,
+            'estruc' => $estruc,
+        ]);
+
+       
     }
 
     /**
@@ -98,9 +122,40 @@ class RadioController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       
 
+         $person=EstructurEq::findOne(['radio_idradio'=>$id]);
+         $p=count($person);
+         if($p == 1){
+         $person->delete();
+         }
+        $this->findModel($id)->delete();
+        
         return $this->redirect(['index']);
+
+    }
+
+    public function actionLists($id)
+    {
+        $countPosts = Estructura::find()
+                ->where(['estacion_idestacion' => $id])
+                ->count();
+ 
+        $posts = Estructura::find()
+                ->where(['estacion_idestacion' => $id])
+                ->all();
+ 
+        if($countPosts>0){
+            echo "<option value=1>Seleccione una estructura</option>";
+            foreach($posts as $post){
+
+                echo "<option value='".$post->idestructura."'>".$post->nombre."</option>";
+            }
+        }
+        else{
+            echo "<option value=1>Seleccione una estructura</option>";
+        }
+ 
     }
 
     /**

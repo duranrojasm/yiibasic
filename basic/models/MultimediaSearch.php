@@ -18,7 +18,8 @@ class MultimediaSearch extends Multimedia
     public function rules()
     {
         return [
-            [['idmultimedia', 'detalle_proyecto_iddetalle_proyecto', 'inspeccion_idinspeccion', 'estacion_idestacion', 'nodo_idnodo', 'multimedia'], 'integer'],
+            [['idmultimedia', 'detalle_proyecto_iddetalle_proyecto', 'inspeccion_idinspeccion', 'estacion_idestacion', 'nodo_idnodo'], 'integer'],
+            [['multimedia'], 'safe'],
         ];
     }
 
@@ -60,8 +61,9 @@ class MultimediaSearch extends Multimedia
             'inspeccion_idinspeccion' => $this->inspeccion_idinspeccion,
             'estacion_idestacion' => $this->estacion_idestacion,
             'nodo_idnodo' => $this->nodo_idnodo,
-            'multimedia' => $this->multimedia,
         ]);
+
+        $query->andFilterWhere(['like', 'multimedia', $this->multimedia]);
 
         return $dataProvider;
     }

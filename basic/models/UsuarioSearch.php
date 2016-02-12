@@ -18,8 +18,8 @@ class UsuarioSearch extends Usuario
     public function rules()
     {
         return [
-            [['idusuario', 'estacion_idestacion', 'rol_idrol'], 'integer'],
-            [['nombre', 'apellido', 'cedula', 'num_sap', 'carnet', 'telefono_cel', 'telefono_hab', 'cargo', 'correo', 'gerencia_general', 'gerencia', 'departamento'], 'safe'],
+            [['idusuario', 'rol_idrol'], 'integer'],
+            [['nombre', 'apellido', 'cedula', 'num_sap', 'carnet', 'estacion_idestacion', 'telefono_cel', 'telefono_hab', 'cargo', 'correo', 'gerencia_general', 'gerencia', 'departamento'], 'safe'],
             [['disponibilidad'], 'boolean'],
         ];
     }
@@ -57,25 +57,28 @@ class UsuarioSearch extends Usuario
             return $dataProvider;
         }
 
+        $query->joinWith('estacionIdestacion');
+
         $query->andFilterWhere([
             'idusuario' => $this->idusuario,
-            'estacion_idestacion' => $this->estacion_idestacion,
+         
             'rol_idrol' => $this->rol_idrol,
             'disponibilidad' => $this->disponibilidad,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido])
-            ->andFilterWhere(['like', 'cedula', $this->cedula])
-            ->andFilterWhere(['like', 'num_sap', $this->num_sap])
-            ->andFilterWhere(['like', 'carnet', $this->carnet])
-            ->andFilterWhere(['like', 'telefono_cel', $this->telefono_cel])
-            ->andFilterWhere(['like', 'telefono_hab', $this->telefono_hab])
-            ->andFilterWhere(['like', 'cargo', $this->cargo])
-            ->andFilterWhere(['like', 'correo', $this->correo])
-            ->andFilterWhere(['like', 'gerencia_general', $this->gerencia_general])
-            ->andFilterWhere(['like', 'gerencia', $this->gerencia])
-            ->andFilterWhere(['like', 'departamento', $this->departamento]);
+        $query->andFilterWhere(['like', 'usuario.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'usuario.apellido', $this->apellido])
+            ->andFilterWhere(['like', 'usuario.cedula', $this->cedula])
+            ->andFilterWhere(['like', 'usuario.num_sap', $this->num_sap])
+            ->andFilterWhere(['like', 'usuario.carnet', $this->carnet])
+            ->andFilterWhere(['like', 'usuario.telefono_cel', $this->telefono_cel])
+            ->andFilterWhere(['like', 'usuario.telefono_hab', $this->telefono_hab])
+            ->andFilterWhere(['like', 'usuario.cargo', $this->cargo])
+            ->andFilterWhere(['like', 'usuario.correo', $this->correo])
+            ->andFilterWhere(['like', 'usuario.gerencia_general', $this->gerencia_general])
+            ->andFilterWhere(['like', 'usuario.gerencia', $this->gerencia])
+            ->andFilterWhere(['like', 'usuario.departamento', $this->departamento])
+             ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion]);
 
         return $dataProvider;
     }

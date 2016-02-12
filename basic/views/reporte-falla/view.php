@@ -28,15 +28,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idreporte_falla',
-            'falla_idfalla',
             'descripcion',
-            'ptos_referencia',
+             
+          
+              [
+                'attribute'=>'falla_idfalla',
+                'value'=>'fallaIdfalla.nombre',
+                'label'=>'Falla',
+               
+            ],
+        
             'fecha_inicio',
-            'fecha_fin',
-            'estatus',
-            'distancia',
-            'urgencia',
+                    
+                'estatus',
+                    
+                 [
+                'attribute'=>'estacion_idestacion',
+                'value'=>'estacionIdestacion.nombre',
+                'label'=>'Estacion',
+               
+            ],
+               [
+                'attribute'=>'fibra_optica_idfibra_optica',
+                'value'=>'fibraOpticaIdfibraOptica.nombre',
+                 'label'=>'Enlace F.O',
+
+               
+            ],   
+            
+             'urgencia',
+             'ptos_referencia',
+             'distancia',
         ],
     ]) ?>
 

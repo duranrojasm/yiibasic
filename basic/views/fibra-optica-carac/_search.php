@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'caracteristica_fo_idcaracteristica') ?>
 
-    <?= $form->field($model, 'fibra_optica_idfibra_optica') ?>
+    <?= $form->field($model, 'hilo_idhilo') ?>
 
     <?= $form->field($model, 'valor') ?>
 

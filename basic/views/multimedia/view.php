@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'inspeccion_idinspeccion',
             'estacion_idestacion',
             'nodo_idnodo',
-            'multimedia:datetime',
+            'multimedia',
         ],
     ]) ?>
 

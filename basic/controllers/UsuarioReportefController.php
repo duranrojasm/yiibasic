@@ -101,7 +101,16 @@ class UsuarioReportefController extends Controller
      */
     public function actionDelete($reporte_falla_idreporte_falla, $usuario_idusuario)
     {
+
         $this->findModel($reporte_falla_idreporte_falla, $usuario_idusuario)->delete();
+
+        $transaction = \Yii::$app->db->beginTransaction();
+
+                        \Yii::$app->db->createCommand("UPDATE usuario SET disponibilidad='TRUE' WHERE idusuario=:id")
+                        ->bindValue(':id', $usuario_idusuario)
+                        ->execute();
+
+         $transaction->commit();
 
         return $this->redirect(['index']);
     }

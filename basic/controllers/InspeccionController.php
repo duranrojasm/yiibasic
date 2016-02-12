@@ -6,13 +6,18 @@ use Yii;
 use app\models\Inspeccion;
 use app\models\InspeccionSearch;
 use app\models\EstadoItemIsnpeccion;
+use app\models\Multimedia;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Model;
 use app\models\Address;
 use app\models\EntryForm;
-
+use yii\web\UploadedFile;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use app\models\EstadoItemIsnpeccionSearch;
+use app\models\Item;
 
 /**
  * InspeccionController implements the CRUD actions for Inspeccion model.
@@ -46,6 +51,18 @@ class InspeccionController extends Controller
         ]);
     }
 
+
+    public function actionIndexnodo()
+    {
+        $searchModel = new InspeccionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexnodo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Inspeccion model.
      * @param integer $id
@@ -63,16 +80,33 @@ class InspeccionController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
+
+    
     public function actionCreate()
     {
         $model = new Inspeccion();
+        $Archivo = new Multimedia();
         $modelsEstadoItemIns = [new EstadoItemIsnpeccion];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())&& $model->save()) {
+            $Archivo->inspeccion_idinspeccion = $model->idinspeccion;
+            
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '\web\uploads/';
+            $Archivo->image = UploadedFile::getInstances($Archivo, 'multimedia');
+            if ($Archivo->image) {
+                foreach ($Archivo->image as $file) {
+                    $path = Yii::$app->params['uploadPath'];
+                    $file->saveAs($path.$file->baseName.'.'.$file->extension);
+                    
+                    $ArchivoS = new Multimedia();
+                    $ArchivoS->inspeccion_idinspeccion= $model->idinspeccion;
+                    $ArchivoS->multimedia= $file->name;
+                    $ArchivoS->save();
+                }
+            } 
 
-
-
-             $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname());
+            $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname());
             Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());
 
             // validate all models
@@ -106,6 +140,7 @@ class InspeccionController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'archivo'=>$Archivo,
                 'modelsEstadoItemIns' => (empty($modelsEstadoItemIns)) ? [new EstadoItemIsnpeccion] : $modelsEstadoItemIns
             ]);
         }
@@ -120,24 +155,17 @@ class InspeccionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelsEstadoItemIns = $model->idinspeccion;
+        $modelsEstadoItemIns = $model->estadoItemIsnpeccions;
+
 
 
          if ($model->load(Yii::$app->request->post())) {
 
-            $oldIDs = ArrayHelper::map($modelsEstadoItemIns, 'id', 'id');
+            $oldIDs = ArrayHelper::map($modelsEstadoItemIns, 'inspeccion_idinspeccion', 'inspeccion_idinspeccion');
             $modelsEstadoItemIns = Model::createMultiple(EstadoItemIsnpeccion::classname(), $modelsEstadoItemIns);
             Model::loadMultiple($modelsEstadoItemIns, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsEstadoItemIns, 'id', 'id')));
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsEstadoItemIns, 'inspeccion_idinspeccion', 'item_iditem')));
 
-            // ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($modelsEstadoItemIns),
-                    ActiveForm::validate($model)
-                );
-            }
 
             // validate all models
             $valid = $model->validate();
@@ -148,12 +176,12 @@ class InspeccionController extends Controller
                 try {
                     if ($flag = $model->save(false)) {
                         if (! empty($deletedIDs)) {
-                            EstadoItemIsnpeccion::deleteAll(['id' => $deletedIDs]);
+                            EstadoItemIsnpeccion::deleteAll(['inspeccion_idinspeccion' => $deletedIDs]);
                         }
                         foreach ($modelsEstadoItemIns as $modelsEstadoItemIns) {
                             $modelsEstadoItemIns->inspeccion_idinspeccion = $model->idinspeccion;
 
-                            if (! ($flag = $modelAddress->save(false))) {
+                            if (! ($flag = $modelsEstadoItemIns->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }
@@ -171,7 +199,7 @@ class InspeccionController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'modelsEstadoI' => (empty($modelsEstadoI)) ? [new EstadoItemIsnpeccion] : $modelsEstadoI
+                'modelsEstadoItemIns' => (empty($modelsEstadoItemIns)) ? [new EstadoItemIsnpeccion] : $modelsEstadoItemIns
             ]);
         }
     }

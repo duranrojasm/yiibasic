@@ -42,7 +42,8 @@ $data =  ArrayHelper::map(Localidad::find()->where(['=', 'tipo', 'Municipio'])->
 
         'options' => ['placeholder' => 'Selecciona una ubicacion ...'],
         'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
+                'tags' => true
         ],
        'addon' => [
         'prepend' => [

@@ -41,7 +41,6 @@ class Inspeccion extends \yii\db\ActiveRecord
     {
         return [
             [['nodo_idnodo', 'estacion_idestacion', 'radio_idradio'], 'integer'],
-            [['descripcion', 'fecha_asig', 'fecha_insp'], 'required'],
             [['fecha_asig', 'fecha_insp'], 'safe'],
             [['descripcion', 'ptos_referencia'], 'string', 'max' => 50],
             [['estatus'], 'string', 'max' => 20]

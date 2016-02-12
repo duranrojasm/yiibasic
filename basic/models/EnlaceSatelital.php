@@ -57,15 +57,15 @@ class EnlaceSatelital extends \yii\db\ActiveRecord
     {
         return [
             'idenlace_satelital' => 'Idenlace Satelital',
-            'torre_idtorre' => 'Torre Idtorre',
-            'cliente_idcliente' => 'Cliente Idcliente',
+            'torre_idtorre' => 'Torre',
+            'cliente_idcliente' => 'Cliente',
             'estacion_idestacion' => 'Estacion Idestacion',
-            'codigo' => 'Codigo',
+            'codigo' => 'Código',
             'nombre' => 'Nombre',
-            'num_antena' => 'Num Antena',
-            'periodo_mantenimiento' => 'Periodo Mantenimiento',
+            'num_antena' => 'Núm Antena',
+            'periodo_mantenimiento' => 'Período Mantenimiento',
             'estatus' => 'Estatus',
-            'ubicacion_disp' => 'Ubicacion Disp',
+            'ubicacion_disp' => 'Ubicación Disp',
             'estacion_idestaciondos' => 'Estacion Idestaciondos',
         ];
     }

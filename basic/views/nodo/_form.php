@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Nodo */
 /* @var $form yii\widgets\ActiveForm */
-$data =  ArrayHelper::map(Estacion::find()->all(),'idestacion','nombre');
+$data =  ArrayHelper::map(Estacion::find()->where(['!=','idestacion','1'])->all(),'idestacion','nombre');
 ?>
 
 <div class="nodo-form">

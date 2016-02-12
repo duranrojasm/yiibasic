@@ -22,8 +22,8 @@ class Model extends \yii\base\Model
         $models   = [];
 
         if (! empty($multipleModels)) {
-            $keys = array_keys(ArrayHelper::map($multipleModels, 'id', 'id'));
-            $multipleModels = array_combine($keys, $multipleModels);
+          $keys = array_keys(ArrayHelper::map($multipleModels, 'reporte_falla_idreporte_falla', 'reporte_falla_idreporte_falla'));
+        // $multipleModels = array_combine($keys, $multipleModels);
         }
 
         if ($post && is_array($post)) {
@@ -40,8 +40,4 @@ class Model extends \yii\base\Model
 
         return $models;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master

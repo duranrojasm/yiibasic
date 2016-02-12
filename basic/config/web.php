@@ -38,6 +38,27 @@ $config = [
             ]
         ],
 
+        'sms' => [
+            'class' => 'app\vendor\LabsMobileSMS\LabsMobileSMS',
+            'LMaccount_username'=>'luis.malpica.18@gmail.com',
+            'LMaccount_password'=>'dt42vd86',
+            'LMaccount_clientapi'=>'priv006',
+        ],
+
+        'mailer' => [
+         'class' => 'yii\swiftmailer\Mailer',
+         //'viewPath' => '@common/mail',
+         'useFileTransport'=>false,
+         'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => 'smtp.gmail.com',
+            'username' => 'luis.malpica.18@gmail.com',
+            'password' => 'UnetMalpica22',
+            'port' => '587',
+            'encryption' => 'tls',
+           ],
+        ], 
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'DoingITeasy',
@@ -52,13 +73,7 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
+       
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

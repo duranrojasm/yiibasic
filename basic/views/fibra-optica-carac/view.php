@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'fibra_optica_idfibra_optica' => $model->fibra_optica_idfibra_optica], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'fibra_optica_idfibra_optica' => $model->fibra_optica_idfibra_optica], [
+        <?= Html::a('Update', ['update', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'hilo_idhilo' => $model->hilo_idhilo], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'caracteristica_fo_idcaracteristica' => $model->caracteristica_fo_idcaracteristica, 'hilo_idhilo' => $model->hilo_idhilo], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'caracteristica_fo_idcaracteristica',
-            'fibra_optica_idfibra_optica',
+            'hilo_idhilo',
             'valor',
         ],
     ]) ?>

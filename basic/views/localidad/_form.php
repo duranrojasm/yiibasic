@@ -54,49 +54,38 @@ $data2 = ['Region'=> 'Region', 'Estado'=>'Estado','Municipio'=>'Municipio'];
 
    
 
-     <div style="width:45%;float:left;padding-right:0%" >
-
+    <div style="width:45%;float:left;padding-right:0%" >  
     
-    <?= $form->field($model, 'localidad_idlocalidad')->widget(Select2::classname(), [
-        'value' => 'General',
-        'data' =>$data,
-         'theme' => Select2::THEME_KRAJEE,
 
-        'options' => ['placeholder' => 'Selecciona una ubicacion ...'],
-        'pluginOptions' => [
-                'allowClear' => true
-        ],
-       'addon' => [
-        'prepend' => [
-            'content' => Html::icon('globe')
-        ],
-        ],
-    ])->label('Ubicación');
-    ?> 
+
+      <?= $form->field($model, 'tipo')->dropDownList($data2, 
+             ['prompt'=>'Seleccione tipo...',
+              'id'=> 'tipo',
+            ])->label('Tipo de Lugar');?>
+
+  
 
   </div>
 
 
     <div style="width:50%;padding-right:5%;top:16px;position: relative">
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])->label('Nombre'); ?>
+
+        
+
+
+    <?= $form->field($model, 'localidad_idlocalidad')->dropDownList($data, 
+             ['prompt'=>'Seleccione ubicación...',
+                'id'=>'ubicacion',
+            
+             ])->label('Ubicación');?>
+         
+   
      </div> 
 
      <div style="width:50%;padding-right:5%;top:30px;position: relative">
-    <?= $form->field($model, 'tipo')->widget(Select2::classname(), [
-        'data' =>$data2,
-         'theme' => Select2::THEME_KRAJEE,
-        'options' => ['placeholder' => 'Selecciona un tipo...'],
-        'pluginOptions' => [
-                'allowClear' => true
-        ],
-        'addon' => [
-        'prepend' => [
-            'content' => Html::icon('globe')
-        ],
-        ],
-    ])->label('Tipo de Lugar');
-    ?> 
- 
+
+     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])->label('Nombre'); ?>
+   
     </div>
 
    <div style="width:50%;float:left;padding-right:115%;top:27px;position: relative;left:15px">
@@ -105,7 +94,44 @@ $data2 = ['Region'=> 'Region', 'Estado'=>'Estado','Municipio'=>'Municipio'];
 
     <?php ActiveForm::end(); ?>
 
-
-
 </div>
+<?php
+$script = <<< JS
+$('#tipo').change(function () {
+    var tipoDropdown = $(this).val();
+  
+    if(tipoDropdown == 'Region')
+      {
+          $('#ubicacion').prop("disabled", true);
+      }
+    else if((tipoDropdown == 'Estado') || (tipoDropdown == 'Municipio'))
+      {
+         $('#ubicacion').prop("disabled", false);
 
+         if(tipoDropdown == 'Estado')
+
+            {
+                   $.post( "index.php?r=localidad/lists&id='.'"+$(this).val(), function( data ) {
+                     $( "select#ubicacion" ).html( data );
+                   });
+            }
+         else if(tipoDropdown == 'Municipio')
+
+            {
+                   $.post( "index.php?r=localidad/listsone&id='.'"+$(this).val(), function( data ) {
+                     $( "select#ubicacion" ).html( data );
+                   });
+            }
+        
+         
+      } 
+      else
+      {
+         $('#ubicacion').prop("disabled", true);
+      } 
+           
+});
+   
+JS;
+$this->registerJs($script); 
+?>

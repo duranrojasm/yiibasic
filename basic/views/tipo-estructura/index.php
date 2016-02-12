@@ -172,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         'panel' => [
-        'heading'=>'<h3 class="panel-title">Implementos de Seguridad</h3>',
+        'heading'=>'<h3 class="panel-title">Tipo de Estructuras</h3>',
         'type'=>'warning',
              //'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Crear Localidad', ['create'], ['class' => 'btn btn-success']),
             'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Actualizar', ['index'], ['class' => 'btn btn-warning btn-sm']),

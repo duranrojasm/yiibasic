@@ -8,6 +8,8 @@ use app\models\MultimediaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use kartik\widgets\Alert;
 
 /**
  * MultimediaController implements the CRUD actions for Multimedia model.
@@ -63,7 +65,23 @@ class MultimediaController extends Controller
         $model = new Multimedia();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idmultimedia]);
+            $image = UploadedFile::getInstance($model, 'multimedia');
+             
+             // store the source file name
+            $model->multimedia = $image->name;
+            
+            //$ext = end((explode(".", $image->name)));
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '\web\uploads/';
+            $path = Yii::$app->params['uploadPath'] .$model->multimedia;
+             
+             if($model->save()){
+                $image->saveAs($path);
+                return $this->redirect(['view', 'id' => $model->idmultimedia]);    
+            } else {
+                return $this->render('create', [
+                'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,

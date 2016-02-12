@@ -10,13 +10,14 @@ use Yii;
  * @property integer $idestructura
  * @property integer $estacion_idestacion
  * @property integer $tipo_estructura_idtipo_estructura
- * @property integer $estructura_idestructura
  * @property string $codigo
  * @property string $nombre
  * @property integer $cantidad
  * @property string $observacion
+ * @property integer $estructura_idestructura
  *
  * @property EstructurEq[] $estructurEqs
+ * @property Radio[] $radioIdradios
  * @property Estacion $estacionIdestacion
  * @property Estructura $estructuraIdestructura
  * @property Estructura[] $estructuras
@@ -39,7 +40,9 @@ class Estructura extends \yii\db\ActiveRecord
     {
         return [
             [['estacion_idestacion', 'tipo_estructura_idtipo_estructura', 'codigo'], 'required'],
-            [['estacion_idestacion', 'tipo_estructura_idtipo_estructura', 'estructura_idestructura', 'cantidad'], 'integer'],
+             [['estructura_idestructura'], 'default', 'value' => null],
+            [['estacion_idestacion', 'tipo_estructura_idtipo_estructura', 'cantidad', 'estructura_idestructura'], 'integer'],
+
             [['codigo', 'nombre'], 'string', 'max' => 30],
             [['observacion'], 'string', 'max' => 300]
         ];
@@ -54,11 +57,11 @@ class Estructura extends \yii\db\ActiveRecord
             'idestructura' => 'Idestructura',
             'estacion_idestacion' => 'Estacion Idestacion',
             'tipo_estructura_idtipo_estructura' => 'Tipo Estructura Idtipo Estructura',
-            'estructura_idestructura' => 'Estructura Idestructura',
             'codigo' => 'Codigo',
             'nombre' => 'Nombre',
             'cantidad' => 'Cantidad',
             'observacion' => 'Observacion',
+            'estructura_idestructura' => 'Estructura Idestructura',
         ];
     }
 
@@ -68,6 +71,14 @@ class Estructura extends \yii\db\ActiveRecord
     public function getEstructurEqs()
     {
         return $this->hasMany(EstructurEq::className(), ['estructura_idestructura' => 'idestructura']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRadioIdradios()
+    {
+        return $this->hasMany(Radio::className(), ['idradio' => 'radio_idradio'])->viaTable('estructur_eq', ['estructura_idestructura' => 'idestructura']);
     }
 
     /**

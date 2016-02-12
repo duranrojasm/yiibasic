@@ -12,7 +12,7 @@ use Yii;
  * @property integer $inspeccion_idinspeccion
  * @property integer $estacion_idestacion
  * @property integer $nodo_idnodo
- * @property integer $multimedia
+ * @property string $multimedia
  *
  * @property DetalleProyecto $detalleProyectoIddetalleProyecto
  * @property Estacion $estacionIdestacion
@@ -24,6 +24,8 @@ class Multimedia extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $image;
     public static function tableName()
     {
         return 'multimedia';
@@ -35,7 +37,9 @@ class Multimedia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['detalle_proyecto_iddetalle_proyecto', 'inspeccion_idinspeccion', 'estacion_idestacion', 'nodo_idnodo', 'multimedia'], 'integer']
+            [['detalle_proyecto_iddetalle_proyecto', 'inspeccion_idinspeccion', 'estacion_idestacion', 'nodo_idnodo'], 'integer'],
+            [['image'],'file'],
+            [['multimedia'], 'string', 'max' => 45]
         ];
     }
 

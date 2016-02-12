@@ -18,9 +18,9 @@ class ReporteFallaSearch extends ReporteFalla
     public function rules()
     {
         return [
-            [['idreporte_falla', 'falla_idfalla'], 'integer'],
-            [['descripcion', 'ptos_referencia', 'fecha_inicio', 'fecha_fin', 'estatus', 'urgencia'], 'safe'],
-            [['distancia'], 'number'],
+            [['idreporte_falla'], 'integer'],
+            [['descripcion', 'ptos_referencia', 'fecha_inicio', 'fecha_fin', 'estatus', 'urgencia','equipo_general_idequipo_general', 'enlace_satelital_idenlace_satelital', 'radio_idradio', 'fibra_optica_idfibra_optica', 'estacion_idestacion', 'nodo_idnodo', 'falla_idfalla'], 'safe'],
+            [['distancia','atraso'], 'number'],
         ];
     }
 
@@ -40,9 +40,21 @@ class ReporteFallaSearch extends ReporteFalla
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$n)
     {
-        $query = ReporteFalla::find();
+        if($n==1)
+        {
+
+           $query = ReporteFalla::find()->where(['>','fibra_optica_idfibra_optica', '1']);
+
+        }elseif ($n==2)
+        {
+           $query = ReporteFalla::find()->where(['>','radio_idradio', '1']);
+               
+        }elseif ($n==3)
+        {
+             $query = ReporteFalla::find()->where(['>','enlace_satelital_idenlace_satelital', '1']);; 
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,18 +68,34 @@ class ReporteFallaSearch extends ReporteFalla
             return $dataProvider;
         }
 
+        $query->joinWith('enlaceSatelitalIdenlaceSatelital')
+        ->joinWith('equipoGeneralIdequipoGeneral')
+        ->joinWith('estacionIdestacion')
+        ->joinWith('fallaIdfalla')
+        ->joinWith('fibraOpticaIdfibraOptica')
+        ->joinWith('nodoIdnodo')
+        ->joinWith('radioIdradio');
+        
+
         $query->andFilterWhere([
             'idreporte_falla' => $this->idreporte_falla,
-            'falla_idfalla' => $this->falla_idfalla,
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
-            'distancia' => $this->distancia,
+           
         ]);
 
-        $query->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'ptos_referencia', $this->ptos_referencia])
-            ->andFilterWhere(['like', 'estatus', $this->estatus])
-            ->andFilterWhere(['like', 'urgencia', $this->urgencia]);
+        $query->andFilterWhere(['like', 'reporte_falla.descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'reporte_falla.ptos_referencia', $this->ptos_referencia])
+            ->andFilterWhere(['like', 'reporte_falla.estatus', $this->estatus])
+            ->andFilterWhere(['like', 'reporte_falla.urgencia', $this->urgencia])
+            ->andFilterWhere(['=', 'reporte_falla.distancia', $this->distancia])
+            ->andFilterWhere(['like', 'falla.nombre', $this->falla_idfalla])
+            ->andFilterWhere(['like', 'enlace_satelital.codigo', $this->enlace_satelital_idenlace_satelital])
+            ->andFilterWhere(['like', 'radio.serial', $this->radio_idradio])
+            ->andFilterWhere(['like', 'fibra_optica.nombre', $this->fibra_optica_idfibra_optica])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion])
+            ->andFilterWhere(['like', 'equipo_general.nombre', $this->equipo_general_idequipo_general])
+            ->andFilterWhere(['like', 'nodo.nombre', $this->nodo_idnodo]);
 
         return $dataProvider;
     }

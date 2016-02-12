@@ -18,8 +18,8 @@ class RadioSearch extends Radio
     public function rules()
     {
         return [
-            [['idradio', 'modelo_idmodelo', 'estacion_idestacion', 'periodo_mantenimiento', 'estacion_idestaciondos'], 'integer'],
-            [['observaciones', 'posicion_fisica', 'nombre', 'marca', 'serial', 'estatus', 'ubicacion_disp'], 'safe'],
+            [['idradio', 'periodo_mantenimiento'], 'integer'],
+            [['observaciones', 'posicion_fisica', 'nombre', 'marca', 'serial', 'estatus', 'ubicacion_disp','estacion_idestaciondos', 'modelo_idmodelo', 'estacion_idestacion'], 'safe'],
         ];
     }
 
@@ -55,21 +55,24 @@ class RadioSearch extends Radio
             return $dataProvider;
         }
 
+        $query->joinWith('modeloIdmodelo')->joinWith('estacionIdestacion0');
+
         $query->andFilterWhere([
             'idradio' => $this->idradio,
-            'modelo_idmodelo' => $this->modelo_idmodelo,
-            'estacion_idestacion' => $this->estacion_idestacion,
-            'periodo_mantenimiento' => $this->periodo_mantenimiento,
-            'estacion_idestaciondos' => $this->estacion_idestaciondos,
+     
         ]);
 
-        $query->andFilterWhere(['like', 'observaciones', $this->observaciones])
-            ->andFilterWhere(['like', 'posicion_fisica', $this->posicion_fisica])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'marca', $this->marca])
-            ->andFilterWhere(['like', 'serial', $this->serial])
-            ->andFilterWhere(['like', 'estatus', $this->estatus])
-            ->andFilterWhere(['like', 'ubicacion_disp', $this->ubicacion_disp]);
+        $query->andFilterWhere(['like', 'radio.observaciones', $this->observaciones])
+            ->andFilterWhere(['like', 'radio.posicion_fisica', $this->posicion_fisica])
+            ->andFilterWhere(['like', 'radio.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'radio.marca', $this->marca])
+            ->andFilterWhere(['like', 'radio.serial', $this->serial])
+            ->andFilterWhere(['like', 'radio.estatus', $this->estatus])
+            ->andFilterWhere(['like', 'radio.ubicacion_disp', $this->ubicacion_disp])
+            ->andFilterWhere(['like', 'modelo.nombre',$this->modelo_idmodelo])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestacion])
+            ->andFilterWhere(['like', 'estacion.nombre', $this->estacion_idestaciondos])
+            ->andFilterWhere(['=', 'radio.periodo_mantenimiento', $this->periodo_mantenimiento]);
 
         return $dataProvider;
     }
